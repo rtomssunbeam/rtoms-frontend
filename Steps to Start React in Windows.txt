@@ -1,0 +1,25 @@
+1. Run Command Prompt as Administrator
+
+2. Change Directory -> E:
+		    
+3. Select the path -> cd <Path>
+
+4. Download React Dependencies -> npm init react-app rtoms
+			       OR
+                               -> npx create-react-app rtoms
+ 
+5. Download Dependencies -> npm install react-router-dom@5.2.0 (Use this specific version otherwise it will give an error)
+			 -> npm install bootstrap 
+
+6 Install AntDesign -> npm install antd --save
+
+7. Install Styled-Component -> npm install styled-components
+
+8. Install react-toastify -> npm install react-toastify
+
+
+
+
+
+Command to uninstall react -> npm uninstall -g create-react-app
+
