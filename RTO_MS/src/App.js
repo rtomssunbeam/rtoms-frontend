@@ -4,10 +4,9 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../node_modules/bootstrap/dist/js/bootstrap.bundle.min';
 
 import {
-  BrowserRouter as Router,
+  BrowserRouter as Router, Routes, Route,
   Switch,
-  Route,
-  Link
+  Link,
 } from "react-router-dom";
 
 import Header from './Components/Header';
@@ -18,13 +17,16 @@ import Navbar from './Components/Navbar';
 
 import HpageCard from './HpageCard';
 import DriversLicense from './DriversLicense';
-import OnlineTest from './OnlineTest';
+import Appointment from './Appointment';
 import VehicleRegistration from './VehicleRegistration';
 import NotFound from "./NotFound";
 import Signin from './Pages/Signin';
 import Signup from './Pages/Signup';
 import ContactUs from './Pages/ContactUs';
 import Services from './Pages/OnlineServices';
+import Stepper from './Components/Stepper';
+import LearningLicense from './Pages/LearningLicense';
+// import Stepper from './Components/Stepper1';
 // import Aboutus from './Pages/Aboutus';
 
 
@@ -46,13 +48,16 @@ function App() {
             <Route path="/" exact component={HpageCard} />
             <Route path="/home" exact component={HpageCard} />
             <Route path="/drivers-license" exact component={DriversLicense} />
-            <Route path="/online-test" exact component={OnlineTest} />
+            <Route path="/Appointment" exact component={Appointment} />
             <Route path="/vehicle-registration" exact component={VehicleRegistration} />
             {/* <Route path="*" exact component={NotFound} /> */}
             <Route path="/Signin" exact component={Signin} />
             <Route path="/Signup" exact component={Signup} />
             <Route path="/ContactUs" exact component={ContactUs} />
             <Route path="/OnlineServices" exact component={Services} />
+            <Route path="/LearningLicense" exact component={LearningLicense} />
+
+            <Route path="/Stepper" exact component={Stepper} />
             {/* <Route path="/Aboutus" exact component={Aboutus} /> */}
             {/* <Signin />
             </Route> */}
@@ -61,6 +66,7 @@ function App() {
             </Route> */}
             {/* <Route path="/Signin" component={Signin} /> */}
           </Switch>
+
         </div>
       </main>
       <div id="footer" className="footer">

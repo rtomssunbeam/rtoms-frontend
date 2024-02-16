@@ -26,13 +26,13 @@ const HpageCard = () => {
           </div>
         </div>
         <div className="box">
-          <Link to="/online-test">
+          <Link to="/Appointment">
             <img src={feepay} className="card-img-top" alt="learning logo" />
           </Link>
           <div className="card-body">
             <h5 className="card-title">Online Test/ Appointment</h5>
             <p className="card-text">You can apply here for Online Test/ Appointment.</p>
-            <Link to="/online-test" className="btn btn-primary">
+            <Link to="/Appointment" className="btn btn-primary">
               Apply Here
             </Link>
           </div>
