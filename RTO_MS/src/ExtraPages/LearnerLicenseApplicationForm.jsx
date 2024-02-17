@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 const LearnerLicenseApplicationForm = () => {
-    const url = "http://127.0.0.1:8080/lernerLicense/application"
+    // const url = "http://127.0.0.1:8080/lernerLicense/application"
+    const url = "http://192.168.0.115:8080/lernerLicense/application"
     const [formData, setFormData] = useState({
         firstName: '',
         middleName: '',
         lastName: '',
         mobileNumber: '',
-        userId: 1, // Assuming you have the user ID
+        userId: 2, // Assuming you have the user ID
         postalAddressDTO: {
             house: '',
             street: '',
@@ -23,9 +24,9 @@ const LearnerLicenseApplicationForm = () => {
         rtoOffice: '',
         qualification: '',
         applicationTypes: [],
-        // files: [null, null, null], // For storing uploaded files
+        files: [null, null, null], // For storing uploaded files
     });
-    const [files, setFiles] = useState({files:[null,null,null],});
+    // const [files, setFiles] = useState({files:[null,null,null],});
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -62,11 +63,49 @@ const LearnerLicenseApplicationForm = () => {
         });
     };
 
+    // const handleFileInputChange = (e, fileInputIndex) => {
+    //     const files = Array.from(e.target.files);
+    //     setFormData((prevData) => {
+    //         const updatedFiles = [...prevData.files];
+    //         updatedFiles[fileInputIndex] = files;
+
+    //         return {
+    //             ...prevData,
+    //             files: updatedFiles,
+    //         };
+    //     });
+    // };
+
+    // const handleFileInputChange = (e, fileInputIndex) => {
+    //     const files = Array.from(e.target.files);
+    //     setFormData((prevData) => {
+    //         const updatedFiles = [...prevData.files];
+
+    //         // Check if the element at fileInputIndex is an array
+    //         if (Array.isArray(updatedFiles[fileInputIndex])) {
+    //             updatedFiles[fileInputIndex] = files;
+    //         } else {
+    //             updatedFiles[fileInputIndex] = [...files];
+    //         }
+
+    //         return {
+    //             ...prevData,
+    //             files: updatedFiles,
+    //         };
+    //     });
+    // };
+
     const handleFileInputChange = (e, fileInputIndex) => {
         const files = Array.from(e.target.files);
-        setFiles((prevData) => {
+        setFormData((prevData) => {
             const updatedFiles = [...prevData.files];
-            updatedFiles[fileInputIndex] = files;
+
+            // Check if the element at fileInputIndex is null
+            if (updatedFiles[fileInputIndex] === null) {
+                updatedFiles[fileInputIndex] = files;
+            } else {
+                updatedFiles[fileInputIndex] = [...files];
+            }
 
             return {
                 ...prevData,
@@ -84,18 +123,75 @@ const LearnerLicenseApplicationForm = () => {
     //     }));
     //   };
 
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
+
+    //     const learnerLicenseApplicationDto = new FormData();
+    //     // const files=new files();
+
+    //     // // Append string fields
+    //     // Object.keys(formData).forEach((key) => {
+    //     //   if (key !== 'files') {
+    //     //     formData.append(key, JSON.stringify(formData[key]));
+    //     //   }
+    //     // });
+
+    //     // Append string fields
+    //     Object.keys(formData).forEach((key) => {
+    //         if (key !== 'files' && key !== 'postalAddressDTO') {
+    //             formData.append(key, JSON.stringify(formData[key]));
+    //         } else if (key === 'postalAddressDTO') {
+    //             Object.keys(formData.postalAddressDTO).forEach((addressKey) => {
+    //                 formData.append(
+    //                     `postalAddressDTO.${addressKey}`,
+    //                     JSON.stringify(formData.postalAddressDTO[addressKey])
+    //                 );
+    //             });
+    //         }
+    //     });
+
+    //     // Append files
+    //     // formData.files.forEach((file, index) => {
+    //     //     formData.append(`files[${index}]`, file);
+    //     // });
+
+    //     // Append files
+    //     // formData.files.forEach((fileGroup, fileInputIndex) => {
+    //     //     fileGroup.forEach((file, index) => {
+    //     //         formData.append(`files[${fileInputIndex}][${index}]`, file);
+    //     //     });
+    //     // });
+
+    //     formData.files.forEach((fileGroup, fileInputIndex) => {
+    //         if (fileGroup) {  // Check if fileGroup is not null or undefined
+    //             fileGroup.forEach((file, index) => {
+    //                 formData.append(`files[${fileInputIndex}][${index}]`, file);
+    //             });
+    //         }
+    //     });
+
+
+
+
+    //     try {
+    //         const response = await axios.post(url, formData, {
+    //             headers: {
+    //                 'Content-Type': 'multipart/form-data',
+    //             },
+    //         });
+
+    //         console.log('Server response:', response.data);
+    //         // Handle success or redirect as needed
+    //     } catch (error) {
+    //         console.error('Error submitting form:', error);
+    //         // Handle error
+    //     }
+    // };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         const learnerLicenseApplicationDto = new FormData();
-        const files=new files();
-
-        // // Append string fields
-        // Object.keys(formData).forEach((key) => {
-        //   if (key !== 'files') {
-        //     learnerLicenseApplicationDto.append(key, JSON.stringify(formData[key]));
-        //   }
-        // });
 
         // Append string fields
         Object.keys(formData).forEach((key) => {
@@ -111,18 +207,41 @@ const LearnerLicenseApplicationForm = () => {
             }
         });
 
-
-        // Append files
-        formData.files.forEach((fileGroup, fileInputIndex) => {
-            fileGroup.forEach((file, index) => {
-                files.append(`files[${fileInputIndex}][${index}]`, file);
+        // Append files if formData.files is an array
+        if (Array.isArray(formData.files)) {
+            formData.files.forEach((fileGroup, fileInputIndex) => {
+                if (Array.isArray(fileGroup)) {
+                    fileGroup.forEach((file, index) => {
+                        learnerLicenseApplicationDto.append(`files[${fileInputIndex}][${index}]`, file);
+                    });
+                }
             });
-        });
+        }
+
         try {
-            const response = await axios.post(url, learnerLicenseApplicationDto,files, {
+            // const response = await axios({
+            //     url,
+            //     method: "POST",
+            //     body: JSON.stringify({name:"abcd"})
+            // }
+            // )
+            // console.log(response)
+            // const response = await axios.post(url, {
+            //     files:["null","null","null"]
+            // }, {
+                
+            //     params: {
+            //         name: "name"
+            //     }
+            // },);
+            const formDataNew = new FormData();
+            formDataNew.append("name",JSON.stringify(formData))
+            // formDataNew.append("images",)
+            // console.log(JSON.stringify(formData))
+            const response = await axios.post(url, formDataNew, {
                 headers: {
-                    'Content-Type': 'multipart/mixed',
-                },
+                    'Content-Type': 'multipart/form-data'
+                }
             });
 
             console.log('Server response:', response.data);
@@ -132,6 +251,7 @@ const LearnerLicenseApplicationForm = () => {
             // Handle error
         }
     };
+
 
     return (
         <form onSubmit={handleSubmit}>
@@ -477,22 +597,22 @@ export default LearnerLicenseApplicationForm;
 //   const handleSubmit = async (e) => {
 //     e.preventDefault();
 
-//     const learnerLicenseApplicationDto = new FormData();
+//     const formData = new FormData();
 
 //     // Append string fields
 //     Object.keys(formData).forEach((key) => {
 //       if (key !== 'files') {
-//         learnerLicenseApplicationDto.append(key, formData[key]);
+//         formData.append(key, formData[key]);
 //       }
 //     });
 
 //     // Append files
 //     formData.files.forEach((file, index) => {
-//       learnerLicenseApplicationDto.append(`files[${index}]`, file);
+//       formData.append(`files[${index}]`, file);
 //     });
 
 //     try {
-//       const response = await axios.post('/application', learnerLicenseApplicationDto, {
+//       const response = await axios.post('/application', formData, {
 //         headers: {
 //           'Content-Type': 'multipart/form-data',
 //         },
@@ -607,22 +727,22 @@ export default LearnerLicenseApplicationForm;
 //   const handleSubmit = async (e) => {
 //     e.preventDefault();
 
-//     const learnerLicenseApplicationDto = new FormData();
+//     const formData = new FormData();
 
 //     // Append string fields
 //     Object.keys(formData).forEach((key) => {
 //       if (key !== 'files') {
-//         learnerLicenseApplicationDto.append(key, formData[key]);
+//         formData.append(key, formData[key]);
 //       }
 //     });
 
 //     // Append files
 //     formData.files.forEach((file, index) => {
-//       learnerLicenseApplicationDto.append(`files[${index}]`, file);
+//       formData.append(`files[${index}]`, file);
 //     });
 
 //     try {
-//       const response = await axios.post('/application', learnerLicenseApplicationDto, {
+//       const response = await axios.post('/application', formData, {
 //         headers: {
 //           'Content-Type': 'multipart/form-data',
 //         },
@@ -675,11 +795,11 @@ export default LearnerLicenseApplicationForm;
 // // import axios from 'axios';
 
 // // const LearnerLicenseApplicationForm = () => {
-// //   const [learnerLicenseApplicationDto, setLearnerLicenseApplicationDto] = useState('');
+// //   const [formData, setformData] = useState('');
 // //   const [files, setFiles] = useState([]);
 
 // //   const handleInputChange = (e) => {
-// //     setLearnerLicenseApplicationDto(e.target.value);
+// //     setformData(e.target.value);
 // //   };
 
 // //   const handleFileChange = (e) => {
@@ -690,7 +810,7 @@ export default LearnerLicenseApplicationForm;
 // //     e.preventDefault();
 
 // //     const formData = new FormData();
-// //     formData.append('learnerLicenseApplicationDto', learnerLicenseApplicationDto);
+// //     formData.append('formData', formData);
 
 // //     for (let i = 0; i < files.length; i++) {
 // //       formData.append('files', files[i]);
@@ -717,11 +837,11 @@ export default LearnerLicenseApplicationForm;
 // //       <h2>Learner License Application Form</h2>
 // //       <form onSubmit={handleSubmit}>
 // //         <div>
-// //           <label htmlFor="learnerLicenseApplicationDto">Learner License Application DTO:</label>
+// //           <label htmlFor="formData">Learner License Application DTO:</label>
 // //           <input
 // //             type="text"
-// //             id="learnerLicenseApplicationDto"
-// //             value={learnerLicenseApplicationDto}
+// //             id="formData"
+// //             value={formData}
 // //             onChange={handleInputChange}
 // //           />
 // //         </div>
