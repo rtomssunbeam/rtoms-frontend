@@ -17,6 +17,12 @@
 
 8. Install react-toastify -> npm install react-toastify
 
+9. Install react-icons for Stepper form -> npm install react-icons
+
+10. npm install react-hook-form
+
+11. npm install axios
+
 
 
 
