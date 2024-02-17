@@ -234,11 +234,14 @@ const LearnerLicenseApplicationForm = () => {
             //         name: "name"
             //     }
             // },);
-
-            const response = await axios.post(url, learnerLicenseApplicationDto, {
+            const formDataNew = new FormData();
+            formDataNew.append("name",JSON.stringify(formData))
+            // formDataNew.append("images",)
+            // console.log(JSON.stringify(formData))
+            const response = await axios.post(url, formDataNew, {
                 headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
+                    'Content-Type': 'multipart/form-data'
+                }
             });
 
             console.log('Server response:', response.data);
