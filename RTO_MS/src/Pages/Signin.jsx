@@ -35,124 +35,301 @@ const StyledLink = styled(Link)`
 `;
 
 const Signin = () => {
-    const url = "http://192.168.0.115:8080/user/signIn";
-    const history = useHistory();
+  const url = "http://127.0.0.1:8080/user/signIn";
+  const history = useHistory();
+  const [loading, setLoading] = useState(false);
+  const [credentials, setCredentials] = useState({
+    email: "",
+    password: ""
+  });
 
-    const [credentials, setCredentials] = useState({
-        username: "",
-        password: ""
-    });
+  const handleSuccess = () => {
+    toast.success('Login successful');
+  };
 
-    const handleSuccess = (values) => {
-        console.log('Success:', values);
-        toast.success('Login successful');
-    };
+  const handleFailure = (error) => {
+    console.error('Login failed:', error);
+    toast.error('Login failed. Please check your credentials.');
+  };
 
-    const handleFailure = (errorInfo) => {
-        console.log('Failed:', errorInfo);
-        toast.error('Login failed');
-    };
+  const handleFormSubmit = async () => {
+    try {
+      setLoading(true);
 
-    const handleFormSubmit = async () => {
-        try {
-            // Make a POST request using Axios
-            const response = await axios.post(url, credentials);
+      // Make a POST request using Axios
+      const response = await axios.post(url, credentials);
 
-            // Handle success
-            handleSuccess(response.data);
+      // Assuming your response contains a JWT token
+      const tokenReceived = response.data.token;
 
-            // Assuming your response contains a login token and you want to redirect
-            const tokenReceived = response.data.loginToken;
-            window.sessionStorage.setItem("loginToken", tokenReceived);
-            history.push("/profile");
-        } catch (error) {
-            // Handle error
-            handleFailure(error);
-        }
-    };
+      // Store the token in sessionStorage or another secure storage mechanism
+      window.sessionStorage.setItem("token", tokenReceived);
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setCredentials({ ...credentials, [name]: value });
-    };
+      // Handle success
+      handleSuccess();
 
-    return (
-        <StyledBox>
-            <StyledForm
-                name="basic"
-                labelCol={{
-                    span: 8,
-                }}
-                wrapperCol={{
-                    span: 16,
-                }}
-                initialValues={{
-                    remember: true,
-                }}
-                onFinish={handleFormSubmit}
-                onFinishFailed={handleFailure}
-                autoComplete="off"
-            >
-                <Form.Item
-                    label="Username"
-                    name="username"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please input your username!',
-                        },
-                    ]}
-                >
-                    <Input onChange={handleChange} />
-                </Form.Item>
+      // Redirect to the desired page
+      history.push("/profile");
+    } catch (error) {
+      // Handle error
+      handleFailure(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-                <Form.Item
-                    label="Password"
-                    name="password"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please input your password!',
-                        },
-                    ]}
-                >
-                    <Input.Password onChange={handleChange} />
-                </Form.Item>
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setCredentials({ ...credentials, [name]: value });
+  };
 
-                <Form.Item
-                    name="remember"
-                    valuePropName="checked"
-                    wrapperCol={{
-                        offset: 8,
-                        span: 16,
-                    }}
-                >
-                    <Checkbox>Remember me</Checkbox>
-                </Form.Item>
+  return (
+    <StyledBox>
+      <StyledForm
+        name="basic"
+        labelCol={{
+          span: 8,
+        }}
+        wrapperCol={{
+          span: 16,
+        }}
+        initialValues={{
+          remember: true,
+        }}
+        onFinish={handleFormSubmit}
+        onFinishFailed={handleFailure}
+        autoComplete="off"
+      >
+        <Form.Item
+          label="Email"
+          name="email"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your email!',
+            },
+          ]}
+        >
+          <Input onChange={handleChange} />
+        </Form.Item>
 
-                <Form.Item
-                    wrapperCol={{
-                        offset: 8,
-                        span: 16,
-                    }}
-                >
-                    <Button type="primary" htmlType="submit">
-                        Submit
-                    </Button>
-                </Form.Item>
+        <Form.Item
+          label="Password"
+          name="password"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your password!',
+            },
+          ]}
+        >
+          <Input.Password onChange={handleChange} />
+        </Form.Item>
 
-                <Form.Item>
-                    Don't have an account?
-                    <StyledLink to="/Signup">SignUp</StyledLink>
-                </Form.Item>
-            </StyledForm>
+        <Form.Item
+          name="remember"
+          valuePropName="checked"
+          wrapperCol={{
+            offset: 8,
+            span: 16,
+          }}
+        >
+          <Checkbox>Remember me</Checkbox>
+        </Form.Item>
 
-            <ToastContainer />
-        </StyledBox>
-    );
+        <Form.Item
+          wrapperCol={{
+            offset: 8,
+            span: 16,
+          }}
+        >
+          <Button type="primary" htmlType="submit" loading={loading}>
+            Submit
+          </Button>
+        </Form.Item>
+
+        <Form.Item>
+          Don't have an account?
+          <StyledLink to="/Signup">SignUp</StyledLink>
+        </Form.Item>
+      </StyledForm>
+
+      <ToastContainer />
+    </StyledBox>
+  );
 };
 
 export default Signin;
+
+
+
+
+// import React, { useState } from 'react';
+// import { Link, useHistory } from 'react-router-dom';
+// import { Button, Checkbox, Form, Input } from 'antd';
+// import styled from 'styled-components';
+// import { toast, ToastContainer } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
+// import axios from 'axios';
+
+// const StyledBox = styled.div`
+//   max-width: 600px;
+//   margin: 0 auto;
+//   padding: 20px;
+//   background-color: #f5f5f5;
+//   border: 1px solid #d9d9d9;
+//   border-radius: 5px;
+// `;
+
+// const StyledForm = styled(Form)`
+//   label {
+//     font-weight: bold;
+//   }
+
+//   .ant-btn-primary {
+//     margin-right: 8px;
+//   }
+
+//   .ant-form-item-control-input-content {
+//     display: flex;
+//     align-items: center;
+//   }
+// `;
+
+// const StyledLink = styled(Link)`
+//   margin-left: 8px;
+// `;
+
+// const Signin = () => {
+//     // const url = "http://192.168.0.115:8080/user/signIn";
+//     const url = "http://127.0.0.1:8080/user/signIn"
+
+//     const history = useHistory();
+
+//     const [credentials, setCredentials] = useState({
+//         email: "",
+//         password: ""
+//     });
+
+//     const handleSuccess = (values) => {
+//         console.log('Success:', values);
+//         toast.success('Login successful');
+//     };
+
+//     const handleFailure = (errorInfo) => {
+//         console.log('Failed:', errorInfo);
+//         toast.error('Login failed');
+//     };
+
+//     const handleFormSubmit = async () => {
+//         try {
+//             // Make a POST request using Axios
+//             const response = await axios.post(url, credentials);
+
+//             // Assuming your response contains a JWT token
+//             const tokenReceived = response.data.token;
+
+//             // Store the token in sessionStorage or another secure storage mechanism
+//             window.sessionStorage.setItem("token", tokenReceived);
+
+//             // Handle success
+//             handleSuccess();
+//             // handleSuccess(response.data);
+
+//             // Assuming your response contains a login token and you want to redirect
+//             // const tokenReceived = response.data.loginToken;
+
+//             // window.sessionStorage.setItem("loginToken", tokenReceived);
+
+//             history.push("/profile");
+//         } catch (error) {
+//             // Handle error
+//             handleFailure(error);
+//         }
+//     };
+
+//     const handleChange = (e) => {
+//         const { name, value } = e.target;
+//         setCredentials({ ...credentials, [name]: value });
+//     };
+
+//     return (
+//         <StyledBox>
+//             <StyledForm
+//                 name="basic"
+//                 labelCol={{
+//                     span: 8,
+//                 }}
+//                 wrapperCol={{
+//                     span: 16,
+//                 }}
+//                 initialValues={{
+//                     remember: true,
+//                 }}
+//                 onFinish={handleFormSubmit}
+//                 onFinishFailed={handleFailure}
+//                 autoComplete="off"
+//             >
+//                 <Form.Item
+//                     label="Email"
+//                     name="email"
+//                     rules={[
+//                         {
+//                             required: true,
+//                             message: 'Please input your email!',
+//                         },
+//                     ]}
+//                 >
+//                     <Input onChange={handleChange} />
+//                 </Form.Item>
+
+//                 <Form.Item
+//                     label="Password"
+//                     name="password"
+//                     rules={[
+//                         {
+//                             required: true,
+//                             message: 'Please input your password!',
+//                         },
+//                     ]}
+//                 >
+//                     <Input.Password onChange={handleChange} />
+//                 </Form.Item>
+
+//                 <Form.Item
+//                     name="remember"
+//                     valuePropName="checked"
+//                     wrapperCol={{
+//                         offset: 8,
+//                         span: 16,
+//                     }}
+//                 >
+//                     <Checkbox>Remember me</Checkbox>
+//                 </Form.Item>
+
+//                 <Form.Item
+//                     wrapperCol={{
+//                         offset: 8,
+//                         span: 16,
+//                     }}
+//                 >
+//                     <Button type="primary" htmlType="submit">
+//                         Submit
+//                     </Button>
+//                 </Form.Item>
+
+//                 <Form.Item>
+//                     Don't have an account?
+//                     <StyledLink to="/Signup">SignUp</StyledLink>
+//                 </Form.Item>
+//             </StyledForm>
+
+//             <ToastContainer />
+//         </StyledBox>
+//     );
+// };
+
+// export default Signin;
 
 
 
