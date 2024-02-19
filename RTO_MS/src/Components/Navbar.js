@@ -24,7 +24,7 @@ function Navbar() {
               </a>
               <ul className="dropdown-menu">
                 <li className="dropdown-item"><Link className='nav-link' aria-current='page' to='/LearningLicense'>Apply for Learning License</Link></li>
-                <li className="dropdown-item"><Link className='nav-link' aria-current='page' to='/LearningLicense'>Apply for Permanent License</Link></li>
+                <li className="dropdown-item"><Link className='nav-link' aria-current='page' to='/PermanentLicense'>Apply for Permanent License</Link></li>
                 <li className="dropdown-item"><Link className='nav-link' aria-current='page' to='/Appointment'>Book an Appointment</Link></li>
                 {/* <li className="dropdown-item"><Link className='nav-link' aria-current='page' to='/vehicle-registration'>Vehicle Registration</Link></li> */}
               </ul>

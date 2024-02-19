@@ -12,8 +12,8 @@ import PermanentLicenseApplicationForm from './ExtraPages/PermanentLicenseApplic
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
-    {/* <App /> */}
-    <PermanentLicenseApplicationForm />
+    <App />
+    {/* <PermanentLicenseApplicationForm /> */}
     {/* <LearnerLicenseApplicationForm /> */}
     {/* <DoLogin /> */}
   </BrowserRouter>

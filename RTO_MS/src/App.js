@@ -26,7 +26,13 @@ import ContactUs from './Pages/ContactUs';
 import Services from './Pages/OnlineServices';
 import Stepper from './Components/Stepper';
 import LearningLicense from './Pages/LearningLicense';
+import PermanentLicense from './Pages/PermanentLicense';
 import OtpVerification from './Pages/OtpVerification';
+import Terms from './FooterPages/Terms';
+import Concern from './FooterPages/Concern';
+import FAQ from './FooterPages/FAQ';
+import Feedback from './FooterPages/Feedback';
+
 // import Stepper from './Components/Stepper1';
 // import Aboutus from './Pages/Aboutus';
 
@@ -58,6 +64,11 @@ function App() {
             <Route path="/ContactUs" exact component={ContactUs} />
             <Route path="/OnlineServices" exact component={Services} />
             <Route path="/LearningLicense" exact component={LearningLicense} />
+            <Route path="/PermanentLicense" exact component={PermanentLicense} />
+            <Route path="/Terms" exact component={Terms} />
+            <Route path="/Concern" exact component={Concern} />
+            <Route path="/FAQ" exact component={FAQ} />
+            <Route path="/Feedback" exact component={Feedback} />
 
             <Route path="/Stepper" exact component={Stepper} />
             {/* <Route path="/Aboutus" exact component={Aboutus} /> */}
