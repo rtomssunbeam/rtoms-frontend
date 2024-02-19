@@ -26,3 +26,7 @@
 .ml-auto {
   margin-left: auto !important;
 }
+.navbar-color {
+  background-color: #6a93bb80; /* Set your desired color here */
+}
+

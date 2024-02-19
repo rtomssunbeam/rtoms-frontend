@@ -30,6 +30,9 @@ import GetSingleLearnerApplication from './AdminComponents/LearningApplication'
 import LearnerApplicationsList from './AdminComponents/LeranerApplications'
 import SuccessfullyAproovalOrRejection from './AdminComponents/SuccessfullyAproovalOrRejection';
 import UserList from './AdminComponents/UserList'
+import DealerDash from './DealerComponents/DealerDash'
+import VehicleDetails from './DealerComponents/GetVehicleDetails'
+import VehOwnerRegistrationForm from './DealerComponents/OwnerRegister'
 
 
 // import Stepper from './Components/Stepper1';
@@ -65,6 +68,12 @@ function App() {
                   <Route path="/SuccessfullyAproovalOrRejection" exact component={SuccessfullyAproovalOrRejection} />
                   <Route path="/UserList" exact component={UserList} />
                   <Route path="/VehicleListByOwner" exact component={VehicleListByOwner} />
+                  <Route path="/DealerDash" exact component={DealerDash}/>
+                  <Route path="/VehicleDetails" exact component={VehicleDetails}/>
+                  <Route path="/VehOwnerRegistrationForm" exact component={VehOwnerRegistrationForm}/>
+
+                  
+                  
                   
 
                   
