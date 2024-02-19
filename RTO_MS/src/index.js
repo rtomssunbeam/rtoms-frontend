@@ -5,12 +5,15 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import LearnerLicenseApplicationForm from './ExtraPages/LearnerLicenseApplicationForm';
+import PermanentLicenseApplicationForm from './ExtraPages/PermanentLicenseApplicationForm';
+
 // import DoLogin from './ExtraPages/DoLogin';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
-    <App />
+    {/* <App /> */}
+    <PermanentLicenseApplicationForm />
     {/* <LearnerLicenseApplicationForm /> */}
     {/* <DoLogin /> */}
   </BrowserRouter>

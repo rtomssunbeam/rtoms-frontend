@@ -26,6 +26,7 @@ import ContactUs from './Pages/ContactUs';
 import Services from './Pages/OnlineServices';
 import Stepper from './Components/Stepper';
 import LearningLicense from './Pages/LearningLicense';
+import OtpVerification from './Pages/OtpVerification';
 // import Stepper from './Components/Stepper1';
 // import Aboutus from './Pages/Aboutus';
 
@@ -53,6 +54,7 @@ function App() {
             {/* <Route path="*" exact component={NotFound} /> */}
             <Route path="/Signin" exact component={Signin} />
             <Route path="/Signup" exact component={Signup} />
+            <Route path="/otp-verification" component={OtpVerification} />
             <Route path="/ContactUs" exact component={ContactUs} />
             <Route path="/OnlineServices" exact component={Services} />
             <Route path="/LearningLicense" exact component={LearningLicense} />
