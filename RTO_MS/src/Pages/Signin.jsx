@@ -5,36 +5,37 @@ import styled from 'styled-components';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
+import { jwtDecode } from "jwt-decode"; // Import the named export jwtDecode instead of the default export
 
 import './SignIn.css';
 
-const StyledBox = styled.div`
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #f5f5f5;
-  border: 1px solid #d9d9d9;
-  border-radius: 5px;
-`;
+// const StyledBox = styled.div`
+//   max-width: 600px;
+//   margin: 0 auto;
+//   padding: 20px;
+//   background-color: #f5f5f5;
+//   border: 1px solid #d9d9d9;
+//   border-radius: 5px;
+// `;
 
-const StyledForm = styled(Form)`
-  label {
-    font-weight: bold;
-  }
+// const StyledForm = styled(Form)`
+//   label {
+//     font-weight: bold;
+//   }
 
-  .ant-btn-primary {
-    margin-right: 8px;
-  }
+//   .ant-btn-primary {
+//     margin-right: 8px;
+//   }
 
-  .ant-form-item-control-input-content {
-    display: flex;
-    align-items: center;
-  }
-`;
+//   .ant-form-item-control-input-content {
+//     display: flex;
+//     align-items: center;
+//   }
+// `;
 
-const StyledLink = styled(Link)`
-  margin-left: 8px;
-`;
+// const StyledLink = styled(Link)`
+//   margin-left: 8px;
+// `;
 
 const Signin = () => {
     const url = "http://192.168.0.115:8080/user/signIn";
@@ -45,18 +46,10 @@ const Signin = () => {
         password: ""
     });
 
-    // const handleSuccess = (values) => {
-    //     console.log('Success:', values);
-    //     toast.success('Login successful');
-    //     // history.push('/');
-    // };
-
     const [responseMsg, setResponseMsg] = useState(null);
     const [isModalVisible, setIsModalVisible] = useState(false);
 
     const handleSuccess = (values) => {
-        console.log('Success:', values);
-        // toast.success('Login successful');
         setResponseMsg(values.msg);
         showModal();
     };
@@ -67,7 +60,6 @@ const Signin = () => {
 
     const handleOk = () => {
         setIsModalVisible(false);
-        // Redirect to home page after closing the modal
         history.push("/");
     };
 
@@ -77,36 +69,45 @@ const Signin = () => {
 
 
     const handleFailure = (errorInfo) => {
-        console.log('Failed:', errorInfo);
         toast.error('Login failed');
     };
 
     const handleFormSubmit = async () => {
         try {
-            // Make a POST request using Axios
             const response = await axios.post(url, credentials);
-
-            // Handle success
             handleSuccess(response.data);
 
-            // Assuming your response contains a login token and you want to redirect
             const tokenReceived = response.data.loginToken;
             if (tokenReceived) {
                 window.sessionStorage.setItem("loginToken", tokenReceived);
+                const decodedToken = jwtDecode(tokenReceived);
+
+
+                const username = decodedToken.username;
+                const role = decodedToken.role;
+
+                console.log("Username:", username);
+                console.log("Role:", role);
+
+                if (role === "USER") {
+                    history.push("/user-dashboard"); // Redirect to user dashboard route
+                } else if (role === "ADMIN") {
+                    history.push("/admin-dashboard"); // Redirect to admin dashboard route
+                } 
+                else if (role === "DEALER") {
+                    history.push("/dealer-dashboard"); // Redirect to admin dashboard route
+                }
+                else {
+                    console.error("Unknown role:", role); // Handle unknown roles
+                }
+                
+
 
             }
-            // history.push("/");
         } catch (error) {
-            // Handle error
             handleFailure(error);
         }
     };
-
-    // const handleChange = (e) => {
-    //     const { name, value } = e.target;
-    //     setCredentials((prevData)=>({...prevData,[name]:value,}));
-    //         // { ...credentials, [name]: value });
-    // };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -116,11 +117,9 @@ const Signin = () => {
         }));
     };
 
-
-
     return (
-        <StyledBox>
-            <StyledForm
+        <div className="StyledBox">
+            <Form
                 name="basic"
                 labelCol={{
                     span: 8,
@@ -185,9 +184,9 @@ const Signin = () => {
 
                 <Form.Item>
                     Don't have an account?
-                    <StyledLink to="/Signup">SignUp</StyledLink>
+                    <Link to="/Signup">SignUp</Link>
                 </Form.Item>
-            </StyledForm>
+            </Form>
 
             <ToastContainer />
             <Modal
@@ -198,11 +197,12 @@ const Signin = () => {
             >
                 <p>{responseMsg}</p>
             </Modal>
-        </StyledBox>
+        </div>
     );
 };
 
 export default Signin;
+
 
 
 

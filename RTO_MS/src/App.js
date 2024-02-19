@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../node_modules/bootstrap/dist/js/bootstrap.bundle.min';
 
@@ -9,13 +8,10 @@ import {
   Link,
 } from "react-router-dom";
 
-import Header from './Components/Header';
-import Footer from './Components/Footer';
-import Navbar from './Components/Navbar';
-// import MyCarousel from './Components/MyCarousel';
-
-
-import HpageCard from './HpageCard';
+import Header from './MajorComponents/Header/Header';
+import Footer from './MajorComponents/Footer/Footer';
+import Navbar from './MajorComponents/navBar/Navbar';
+import HomePage from './MajorComponents/HomePage/HomePage';
 import DriversLicense from './DriversLicense';
 import Appointment from './Appointment';
 import VehicleRegistration from './VehicleRegistration';
@@ -33,48 +29,40 @@ import OtpVerification from './Pages/OtpVerification';
 
 function App() {
   return (
-    <div className="App">
-      <div id="header">
+    <>
         <Header />
-      </div>
-      <div id="navbar">
         <Navbar />
-      </div>
+     
       <main className="App-body">
-        {/* <div id="MyCarousel">
-          <MyCarousel />
-        </div> */}
         <div>
           <Switch>
-            <Route path="/" exact component={HpageCard} />
-            <Route path="/home" exact component={HpageCard} />
-            <Route path="/drivers-license" exact component={DriversLicense} />
-            <Route path="/Appointment" exact component={Appointment} />
-            <Route path="/vehicle-registration" exact component={VehicleRegistration} />
-            {/* <Route path="*" exact component={NotFound} /> */}
-            <Route path="/Signin" exact component={Signin} />
-            <Route path="/Signup" exact component={Signup} />
-            <Route path="/otp-verification" component={OtpVerification} />
-            <Route path="/ContactUs" exact component={ContactUs} />
-            <Route path="/OnlineServices" exact component={Services} />
-            <Route path="/LearningLicense" exact component={LearningLicense} />
-
-            <Route path="/Stepper" exact component={Stepper} />
-            {/* <Route path="/Aboutus" exact component={Aboutus} /> */}
-            {/* <Signin />
-            </Route> */}
-            {/* <Route exact path="/Signin">
-              <Signup />
-            </Route> */}
-            {/* <Route path="/Signin" component={Signin} /> */}
+                  <Route path="/" exact component={HomePage} />
+                  <Route path="/home" exact component={HomePage} />
+                  <Route path="/drivers-license" exact component={DriversLicense} />
+                  <Route path="/Appointment" exact component={Appointment} />
+                  <Route path="/vehicle-registration" exact component={VehicleRegistration} />
+                  {/* <Route path="*" exact component={NotFound} /> */}
+                  <Route path="/Signin" exact component={Signin} />
+                  <Route path="/Signup" exact component={Signup} />
+                  <Route path="/otp-verification" component={OtpVerification} />
+                  <Route path="/ContactUs" exact component={ContactUs} />
+                  <Route path="/OnlineServices" exact component={Services} />
+                  <Route path="/LearningLicense" exact component={LearningLicense} />
+                  <Route path="/Stepper" exact component={Stepper} />
+                  {/* <Route path="/Aboutus" exact component={Aboutus} /> */}
+                  {/* <Signin />
+                  </Route> */}
+                  {/* <Route exact path="/Signin">
+                    <Signup />
+                  </Route> */}
+                  {/* <Route path="/Signin" component={Signin} /> */}
           </Switch>
 
         </div>
       </main>
-      <div id="footer" className="footer">
+     
         <Footer />
-      </div>
-    </div>
+        </>
 
   );
 }

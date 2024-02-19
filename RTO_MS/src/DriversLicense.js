@@ -1,8 +1,8 @@
 import React from 'react';
-import './App.css';
+// import './App.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../node_modules/bootstrap/dist/js/bootstrap.bundle.min';
-import learningLogo from './Assets/RTOMSimages/LL4.png';
+
 
 // import { Switch, Route } from 'react-router-dom';
 import {
@@ -29,7 +29,7 @@ function DriversLicense() {
 
     <div className="box">
       <Link to="/LearningLicense">
-        <img src={learningLogo} className="card-img-top" alt="learning logo" />
+        <img src={""} className="card-img-top" alt="learning logo" />
       </Link>
       <div className="card-body">
         <h5 className="card-title">Learning License</h5>
@@ -42,7 +42,7 @@ function DriversLicense() {
 
     <div className="box">
       <Link to="/PermanentLicense">
-        <img src={learningLogo} className="card-img-top" alt="learning logo" />
+        <img src={""} className="card-img-top" alt="learning logo" />
       </Link>
       <div className="card-body">
         <h5 className="card-title">Permanent License</h5>
