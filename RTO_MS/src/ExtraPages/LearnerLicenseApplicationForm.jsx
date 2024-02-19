@@ -343,7 +343,7 @@ const LearnerLicenseApplicationForm = () => {
 
     return (
         <div className='StyledBox'>
-            <StyledForm 
+            {/* <StyledForm 
                 name="basic"
                 labelCol={{
                     span: 8,
@@ -357,7 +357,7 @@ const LearnerLicenseApplicationForm = () => {
                 // onFinish={handleFormSubmit}
                 // onFinishFailed={handleFailure}
                 autoComplete="off"
-            >
+            > */}
                 <form onSubmit={handleSubmit}>
                     <label>
                         First Name: 
@@ -649,7 +649,7 @@ const LearnerLicenseApplicationForm = () => {
 
                     <button type="submit">Submit</button>
                 </form>
-            </StyledForm>
+            {/* </StyledForm> */}
 
         </div>
     );

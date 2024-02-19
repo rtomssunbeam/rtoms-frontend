@@ -10,8 +10,8 @@ import LearnerLicenseApplicationForm from './ExtraPages/LearnerLicenseApplicatio
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
-    <App />
-    {/* <LearnerLicenseApplicationForm /> */}
+    {/* <App /> */}
+    <LearnerLicenseApplicationForm />
     {/* <DoLogin /> */}
   </BrowserRouter>
 );
