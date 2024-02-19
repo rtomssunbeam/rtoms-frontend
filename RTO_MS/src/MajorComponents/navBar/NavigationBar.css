@@ -1,0 +1,28 @@
+/* NavigationBar.css */
+
+.active .nav-link {
+  color: green;
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #141313;
+  min-width: 160px;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.ml-auto {
+  margin-left: auto !important;
+}
