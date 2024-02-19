@@ -1,8 +1,7 @@
 import React from 'react';
 import { Form, Input, Button, Checkbox, Select } from 'antd';
-import axios from 'axios';
-
-const { Option } = Select;
+import { useHistory } from 'react-router-dom';
+// const { Option } = Select;
 
 const tailFormItemLayout = {
   wrapperCol: {
@@ -23,20 +22,11 @@ const tailFormItemLayout = {
 //   };
 
 const SignupForm = () => {
-
-  const url = "http://localhost:8080/user/signUp";
-
-  const onFinish = async (values) => {
-    try {
-      // Make a POST request to your Spring Boot backend endpoint
-      const response = await axios.post(url, values);
-
-      // Handle success
-      console.log('Registration successful:', response.data);
-    } catch (error) {
-      // Handle error
-      console.error('Registration failed:', error);
-    }
+  const history = useHistory();
+  const onFinish = (values) => {
+    console.log('Received values of form: ', values);
+     // Redirect to the OTP verification page
+     history.push('/otp-verification');
   };
 
   return (
