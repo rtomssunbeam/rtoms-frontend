@@ -23,6 +23,15 @@ import Services from './Pages/OnlineServices';
 import Stepper from './Components/Stepper';
 import LearningLicense from './Pages/LearningLicense';
 import OtpVerification from './Pages/OtpVerification';
+import LearnerLicenseApplicationForm from './ExtraPages/LearnerLicenseApplicationForm'
+import VehicleListByOwner from './AdminComponents/VehicleListByOwner';
+import OwnerList from './AdminComponents/GetListOfOwners'
+import GetSingleLearnerApplication from './AdminComponents/LearningApplication'
+import LearnerApplicationsList from './AdminComponents/LeranerApplications'
+import SuccessfullyAproovalOrRejection from './AdminComponents/SuccessfullyAproovalOrRejection';
+import UserList from './AdminComponents/UserList'
+
+
 // import Stepper from './Components/Stepper1';
 // import Aboutus from './Pages/Aboutus';
 
@@ -49,6 +58,16 @@ function App() {
                   <Route path="/OnlineServices" exact component={Services} />
                   <Route path="/LearningLicense" exact component={LearningLicense} />
                   <Route path="/Stepper" exact component={Stepper} />
+                  <Route path="/LearnerLicenseApplicationForm" exact component={LearnerLicenseApplicationForm} />
+                  <Route path="/OwnerList" exact component={OwnerList} />
+                  <Route path="/GetSingleLearnerApplication" exact component={GetSingleLearnerApplication} />
+                  <Route path="/LearnerApplicationsList" exact component={LearnerApplicationsList} />
+                  <Route path="/SuccessfullyAproovalOrRejection" exact component={SuccessfullyAproovalOrRejection} />
+                  <Route path="/UserList" exact component={UserList} />
+                  <Route path="/VehicleListByOwner" exact component={VehicleListByOwner} />
+                  
+
+                  
                   {/* <Route path="/Aboutus" exact component={Aboutus} /> */}
                   {/* <Signin />
                   </Route> */}

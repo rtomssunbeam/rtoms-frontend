@@ -12,7 +12,7 @@ const HomePage = () => {
                   <img src="https://cdn1.iconfinder.com/data/icons/documents-id-cards-blue-line/64/471_id-card-driver-license-1024.png" alt="Service 1" />
                   <h5>LEARNING LICENSE</h5>
                   <p>apply for learning license</p>
-                  <Link to="/LearningLicense" className="btn btn-primary" style={{ width: '100%', maxWidth: '100%' }}>APPLY</Link>
+                  <Link to="/LearnerLicenseApplicationForm" className="btn btn-primary" style={{ width: '100%', maxWidth: '100%' }}>APPLY</Link>
                 </div>
 
                 <div className="HomeCard">
@@ -57,9 +57,9 @@ const HomePage = () => {
 
                 <div className="HomeCard">
                   <img src="https://cdn-icons-png.flaticon.com/512/3456/3456426.png" alt="Service 4" />
-                  <h5>GET All Users</h5>
+                  <h5>Register Vehicle</h5>
                   <p>get info of your vehicle</p>
-                  <Link to="/UserList" className="btn btn-primary" style={{ width: '100%', maxWidth: '70%' }}>APPLY</Link>   
+                  <Link to="/RegisterVehicle" className="btn btn-primary" style={{ width: '100%', maxWidth: '70%' }}>APPLY</Link>   
                 </div>
 
        </div>
