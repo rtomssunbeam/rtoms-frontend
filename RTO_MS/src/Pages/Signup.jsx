@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Input, Button, Checkbox, Select } from 'antd';
-
-const { Option } = Select;
+import { useHistory } from 'react-router-dom';
+// const { Option } = Select;
 
 const tailFormItemLayout = {
   wrapperCol: {
@@ -17,8 +17,11 @@ const tailFormItemLayout = {
 };
 
 const SignupForm = () => {
+  const history = useHistory();
   const onFinish = (values) => {
     console.log('Received values of form: ', values);
+     // Redirect to the OTP verification page
+     history.push('/otp-verification');
   };
 
   return (

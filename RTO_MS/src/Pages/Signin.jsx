@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { Button, Checkbox, Form, Input } from 'antd';
+import { Button, Checkbox, Form, Input , Modal} from 'antd';
 import styled from 'styled-components';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
+
+import './SignIn.css';
 
 const StyledBox = styled.div`
   max-width: 600px;
@@ -39,14 +41,40 @@ const Signin = () => {
     const history = useHistory();
 
     const [credentials, setCredentials] = useState({
-        username: "",
+        email: "",
         password: ""
     });
 
+    // const handleSuccess = (values) => {
+    //     console.log('Success:', values);
+    //     toast.success('Login successful');
+    //     // history.push('/');
+    // };
+
+    const [responseMsg, setResponseMsg] = useState(null);
+    const [isModalVisible, setIsModalVisible] = useState(false);
+
     const handleSuccess = (values) => {
         console.log('Success:', values);
-        toast.success('Login successful');
+        // toast.success('Login successful');
+        setResponseMsg(values.msg);
+        showModal();
     };
+
+    const showModal = () => {
+        setIsModalVisible(true);
+    };
+
+    const handleOk = () => {
+        setIsModalVisible(false);
+        // Redirect to home page after closing the modal
+        history.push("/");
+    };
+
+    const handleCancel = () => {
+        setIsModalVisible(false);
+    };
+
 
     const handleFailure = (errorInfo) => {
         console.log('Failed:', errorInfo);
@@ -63,18 +91,32 @@ const Signin = () => {
 
             // Assuming your response contains a login token and you want to redirect
             const tokenReceived = response.data.loginToken;
-            window.sessionStorage.setItem("loginToken", tokenReceived);
-            history.push("/profile");
+            if (tokenReceived) {
+                window.sessionStorage.setItem("loginToken", tokenReceived);
+
+            }
+            // history.push("/");
         } catch (error) {
             // Handle error
             handleFailure(error);
         }
     };
 
+    // const handleChange = (e) => {
+    //     const { name, value } = e.target;
+    //     setCredentials((prevData)=>({...prevData,[name]:value,}));
+    //         // { ...credentials, [name]: value });
+    // };
+
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setCredentials({ ...credentials, [name]: value });
+        setCredentials((prevData) => ({
+            ...prevData,
+            [name]: value,
+        }));
     };
+
+
 
     return (
         <StyledBox>
@@ -95,15 +137,15 @@ const Signin = () => {
             >
                 <Form.Item
                     label="Username"
-                    name="username"
+                    name="email"
                     rules={[
                         {
                             required: true,
-                            message: 'Please input your username!',
+                            message: 'Please input your username(i.e. email)!',
                         },
                     ]}
                 >
-                    <Input onChange={handleChange} />
+                    <Input name='email' onChange={handleChange} />
                 </Form.Item>
 
                 <Form.Item
@@ -116,7 +158,7 @@ const Signin = () => {
                         },
                     ]}
                 >
-                    <Input.Password onChange={handleChange} />
+                    <Input.Password name='password' onChange={handleChange} />
                 </Form.Item>
 
                 <Form.Item
@@ -148,6 +190,14 @@ const Signin = () => {
             </StyledForm>
 
             <ToastContainer />
+            <Modal
+                title="Login Success"
+                visible={isModalVisible}
+                onOk={handleOk}
+                onCancel={handleCancel}
+            >
+                <p>{responseMsg}</p>
+            </Modal>
         </StyledBox>
     );
 };
