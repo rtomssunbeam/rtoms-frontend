@@ -14,7 +14,6 @@ const Header = () => {
         <h1 style={{ fontFamily: 'Arial, sans-serif', fontWeight: 'bold', fontSize: '2em', color: 'orange' }}>
           RTO Management System
         </h1>
-
       </div>
     </header>
   );
