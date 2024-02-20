@@ -34,7 +34,7 @@ function LearnerApplicationsList() {
   useEffect(() => {
     const fetchLearnerApplications = async () => {
       try {
-        const response = await fetch(`http://localhost:8080/admin/getAllLearnerApplications?pageNumber=${pageNumber}`);
+        const response = await fetch(`http://localhost:8080/admin/getLearnerApplications?pageNumber=${pageNumber}`);
         if (!response.ok) {
           throw new Error('Failed to fetch learner applications');
         }
@@ -52,8 +52,7 @@ function LearnerApplicationsList() {
   
     const handleViewApplication =(applicationId) => {
         
-        console.log(applicationId);
-        history.push(`/GetSingleLearnerApplication/${applicationId}`);
+        history.push(`/application/${applicationId}`);
 
       };
     

@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState  } from 'react';
+import { useAuth } from '../../../AuthContext'; // Import the useAuth hook
+
 import { Link, useHistory } from 'react-router-dom';
 import { Button, Checkbox, Form, Input , Modal} from 'antd';
 import styled from 'styled-components';
@@ -37,7 +39,14 @@ import './SignIn.css';
 //   margin-left: 8px;
 // `;
 
+
+
+
 const Signin = () => {
+    
+
+    const { isLoggedIn, handleLogin } = useAuth();
+
     const url = "http://192.168.0.115:8080/user/signIn";
     const history = useHistory();
 
@@ -51,7 +60,10 @@ const Signin = () => {
 
     const handleSuccess = (values) => {
         setResponseMsg(values.msg);
+        sessionStorage.setItem('loginToken', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiQURNSU4iLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.Z5j5FR__97b8pstgUHyHslIKowMDQiw_ahYWCYgEVtc');
         showModal();
+        handleLogin();
+
     };
 
     const showModal = () => {
@@ -77,9 +89,10 @@ const Signin = () => {
             const response = await axios.post(url, credentials);
             handleSuccess(response.data);
 
-            const tokenReceived = response.data.loginToken;
+            // const tokenReceived = response.data.loginToken;
+            const tokenReceived = sessionStorage.getItem('loginToken');
             if (tokenReceived) {
-                window.sessionStorage.setItem("loginToken", tokenReceived);
+                // window.sessionStorage.setItem("loginToken", tokenReceived);
                 const decodedToken = jwtDecode(tokenReceived);
 
 
@@ -90,12 +103,12 @@ const Signin = () => {
                 console.log("Role:", role);
 
                 if (role === "USER") {
-                    history.push("/user-dashboard"); // Redirect to user dashboard route
+                    history.push("/UserDashboard"); // Redirect to user dashboard route
                 } else if (role === "ADMIN") {
-                    history.push("/admin-dashboard"); // Redirect to admin dashboard route
+                    history.push("/AdminDashboard"); // Redirect to admin dashboard route
                 } 
                 else if (role === "DEALER") {
-                    history.push("/dealer-dashboard"); // Redirect to admin dashboard route
+                    history.push("/DealerDash"); // Redirect to admin dashboard route
                 }
                 else {
                     console.error("Unknown role:", role); // Handle unknown roles
