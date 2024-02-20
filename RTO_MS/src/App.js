@@ -38,6 +38,7 @@ import FAQ from './MajorComponents/Footer/FAQ'
 import Feedback from './MajorComponents/Footer/Feedback'
 import Concern from './MajorComponents/Footer/Concern'
 import AboutUs from './Pages/AboutUs'
+import PermanentLicense from './Pages/PermanentLicense';
 
 // import Stepper from './Components/Stepper1';
 // import Aboutus from './Pages/Aboutus';
@@ -46,55 +47,55 @@ import AboutUs from './Pages/AboutUs'
 function App() {
   return (
     <>
-        <Header />
-        <Navbar />
-     
+      <Header />
+      <Navbar />
+
       <main className="App-body">
         <div>
           <Switch>
-                  <Route path="/" exact component={HomePage} />
-                  <Route path="/home" exact component={HomePage} />
-                  <Route path="/drivers-license" exact component={DriversLicense} />
-                  <Route path="/Appointment" exact component={Appointment} />
-                  <Route path="/vehicle-registration" exact component={VehicleRegistration} />
-                  {/* <Route path="*" exact component={NotFound} /> */}
-                  <Route path="/Signin" exact component={Signin} />
-                  <Route path="/Signup" exact component={Signup} />
-                  <Route path="/otp-verification" component={OtpVerification} />
-                  <Route path="/ContactUs" exact component={ContactUs} />
-                  <Route path="/OnlineServices" exact component={Services} />
-                  <Route path="/LearningLicense" exact component={LearningLicense} />
-                  <Route path="/Stepper" exact component={Stepper} />
-                  <Route path="/LearnerLicenseApplicationForm" exact component={LearnerLicenseApplicationForm} />
-                  <Route path="/OwnerList" exact component={OwnerList} />
-                  <Route path="/GetSingleLearnerApplication" exact component={GetSingleLearnerApplication} />
-                  <Route path="/LearnerApplicationsList" exact component={LearnerApplicationsList} />
-                  <Route path="/SuccessfullyAproovalOrRejection" exact component={SuccessfullyAproovalOrRejection} />
-                  <Route path="/UserList" exact component={UserList} />
-                  <Route path="/VehicleListByOwner" exact component={VehicleListByOwner} />
-                  <Route path="/AdminDashboard" exact component={AdminDashboard} />
-                  <Route path="/UserDashboard" exact component={UserDashboard} />
-                  <Route path="/Information" exact component={Information} />
-                  <Route path="/Terms" exact component={Terms} />
-                  <Route path="/FAQ" exact component={FAQ} />
-                  <Route path="/Feedback" exact component={Feedback} />
-                  <Route path="/Concern" exact component={Concern} />
-                  <Route path="/AboutUs" exact component={AboutUs} />
-                  
-                  {/* <Route path="/Aboutus" exact component={Aboutus} /> */}
-                  {/* <Signin />
+            <Route path="/" exact component={HomePage} />
+            <Route path="/home" exact component={HomePage} />
+            <Route path="/drivers-license" exact component={DriversLicense} />
+            <Route path="/Appointment" exact component={Appointment} />
+            <Route path="/vehicle-registration" exact component={VehicleRegistration} />
+            {/* <Route path="*" exact component={NotFound} /> */}
+            <Route path="/Signin" exact component={Signin} />
+            <Route path="/Signup" exact component={Signup} />
+            <Route path="/otp-verification" component={OtpVerification} />
+            <Route path="/ContactUs" exact component={ContactUs} />
+            <Route path="/OnlineServices" exact component={Services} />
+            <Route path="/LearningLicense" exact component={LearningLicense} />
+            <Route path="/Stepper" exact component={Stepper} />
+            <Route path="/LearnerLicenseApplicationForm" exact component={LearnerLicenseApplicationForm} />
+            <Route path="/OwnerList" exact component={OwnerList} />
+            <Route path="/GetSingleLearnerApplication" exact component={GetSingleLearnerApplication} />
+            <Route path="/LearnerApplicationsList" exact component={LearnerApplicationsList} />
+            <Route path="/SuccessfullyAproovalOrRejection" exact component={SuccessfullyAproovalOrRejection} />
+            <Route path="/UserList" exact component={UserList} />
+            <Route path="/VehicleListByOwner" exact component={VehicleListByOwner} />
+            <Route path="/AdminDashboard" exact component={AdminDashboard} />
+            <Route path="/UserDashboard" exact component={UserDashboard} />
+            <Route path="/Information" exact component={Information} />
+            <Route path="/Terms" exact component={Terms} />
+            <Route path="/FAQ" exact component={FAQ} />
+            <Route path="/Feedback" exact component={Feedback} />
+            <Route path="/Concern" exact component={Concern} />
+            <Route path="/AboutUs" exact component={AboutUs} />
+            <Route path="/PermanentLicense" exact component={PermanentLicense} />
+            {/* <Route path="/Aboutus" exact component={Aboutus} /> */}
+            {/* <Signin />
                   </Route> */}
-                  {/* <Route exact path="/Signin">
+            {/* <Route exact path="/Signin">
                     <Signup />
                   </Route> */}
-                  {/* <Route path="/Signin" component={Signin} /> */}
+            {/* <Route path="/Signin" component={Signin} /> */}
           </Switch>
 
         </div>
       </main>
-     
-        <Footer />
-        </>
+
+      <Footer />
+    </>
 
   );
 }

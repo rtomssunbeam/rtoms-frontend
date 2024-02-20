@@ -25,134 +25,141 @@ const SignupForm = () => {
   const history = useHistory();
   const onFinish = (values) => {
     console.log('Received values of form: ', values);
-     // Redirect to the OTP verification page
-     history.push('/otp-verification');
+    // Redirect to the OTP verification page
+    history.push('/otp-verification');
   };
 
   return (
-    <Form
-      onFinish={onFinish}
-      style={{
-        maxWidth: 600,
-      }}
-      scrollToFirstError
-    >
+    <div style={{ textAlign: 'center', marginTop: '20px' }}>
+      <div className='StyledBox' style={{ marginTop: '20px' }}>
+        <h1 style={{ fontFamily: 'Arial, sans-serif', fontWeight: 'bold', fontSize: '2em', color: 'black' }}>
+          Register Yourself
+        </h1>
+        <Form
+          onFinish={onFinish}
+          style={{
+            maxWidth: 600,
+          }}
+          scrollToFirstError
+        >
 
-      <Form.Item
-        name="email"
-        label="E-mail"
-        rules={[
-          {
-            type: 'email',
-            message: 'The input is not a valid E-mail!',
-          },
-          {
-            required: true,
-            message: 'Please input your E-mail!',
-          },
-        ]}
-      >
-        <Input />
-      </Form.Item>
+          <Form.Item
+            name="email"
+            label="E-mail"
+            rules={[
+              {
+                type: 'email',
+                message: 'The input is not a valid E-mail!',
+              },
+              {
+                required: true,
+                message: 'Please input your E-mail!',
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
 
-      <Form.Item
-        name="adharcard_no"
-        label="Aadhaar Card"
-        rules={[
-          {
-            required: true,
-            message: 'Please input your Aadhaar card number!',
-          },
-        ]}
-      >
-        <Input />
-      </Form.Item>
+          <Form.Item
+            name="adharcard_no"
+            label="Aadhaar Card"
+            rules={[
+              {
+                required: true,
+                message: 'Please input your Aadhaar card number!',
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
 
-      <Form.Item
-        name="first_name"
-        label="First Name"
-        rules={[
-          {
-            required: true,
-            message: 'Please input your first name!',
-          },
-        ]}
-      >
-        <Input />
-      </Form.Item>
+          <Form.Item
+            name="first_name"
+            label="First Name"
+            rules={[
+              {
+                required: true,
+                message: 'Please input your first name!',
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
 
-      <Form.Item
-        name="last_name"
-        label="Last Name"
-        rules={[
-          {
-            required: true,
-            message: 'Please input your last name!',
-          },
-        ]}
-      >
-        <Input />
-      </Form.Item>
+          <Form.Item
+            name="last_name"
+            label="Last Name"
+            rules={[
+              {
+                required: true,
+                message: 'Please input your last name!',
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
 
-      <Form.Item
-        name="password"
-        label="Password"
-        rules={[
-          {
-            required: true,
-            message: 'Please input your password!',
-          },
-        ]}
-        hasFeedback
-      >
-        <Input.Password />
-      </Form.Item>
+          <Form.Item
+            name="password"
+            label="Password"
+            rules={[
+              {
+                required: true,
+                message: 'Please input your password!',
+              },
+            ]}
+            hasFeedback
+          >
+            <Input.Password />
+          </Form.Item>
 
-      <Form.Item
-        name="confirm"
-        label="Confirm Password"
-        dependencies={['password']}
-        hasFeedback
-        rules={[
-          {
-            required: true,
-            message: 'Please confirm your password!',
-          },
-          ({ getFieldValue }) => ({
-            validator(_, value) {
-              if (!value || getFieldValue('password') === value) {
-                return Promise.resolve();
-              }
-              return Promise.reject(new Error('The new password that you entered do not match!'));
-            },
-          }),
-        ]}
-      >
-        <Input.Password />
-      </Form.Item>
+          <Form.Item
+            name="confirm"
+            label="Confirm Password"
+            dependencies={['password']}
+            hasFeedback
+            rules={[
+              {
+                required: true,
+                message: 'Please confirm your password!',
+              },
+              ({ getFieldValue }) => ({
+                validator(_, value) {
+                  if (!value || getFieldValue('password') === value) {
+                    return Promise.resolve();
+                  }
+                  return Promise.reject(new Error('The new password that you entered do not match!'));
+                },
+              }),
+            ]}
+          >
+            <Input.Password />
+          </Form.Item>
 
-      <Form.Item
-        name="agreement"
-        valuePropName="checked"
-        rules={[
-          {
-            validator: (_, value) =>
-              value ? Promise.resolve() : Promise.reject(new Error('Should accept agreement')),
-          },
-        ]}
-        {...tailFormItemLayout}
-      >
-        <Checkbox>
-          I have read the <a href="">agreement</a>
-        </Checkbox>
-      </Form.Item>
+          <Form.Item
+            name="agreement"
+            valuePropName="checked"
+            rules={[
+              {
+                validator: (_, value) =>
+                  value ? Promise.resolve() : Promise.reject(new Error('Should accept agreement')),
+              },
+            ]}
+            {...tailFormItemLayout}
+          >
+            <Checkbox>
+              I have read the <a href="">agreement</a>
+            </Checkbox>
+          </Form.Item>
 
-      <Form.Item {...tailFormItemLayout}>
-        <Button type="primary" htmlType="submit">
-          Register
-        </Button>
-      </Form.Item>
-    </Form>
+          <Form.Item {...tailFormItemLayout}>
+            <Button type="primary" htmlType="submit">
+              Register
+            </Button>
+          </Form.Item>
+        </Form>
+      </div>
+    </div>
   );
 };
 
