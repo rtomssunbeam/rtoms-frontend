@@ -63,7 +63,7 @@ function App() {
                   <Route path="/Stepper" exact component={Stepper} />
                   <Route path="/LearnerLicenseApplicationForm" exact component={LearnerLicenseApplicationForm} />
                   <Route path="/OwnerList" exact component={OwnerList} />
-                  <Route path="/GetSingleLearnerApplication" exact component={GetSingleLearnerApplication} />
+                  <Route path="/getLearnerApplication/:applicationId" exact component={GetSingleLearnerApplication} />
                   <Route path="/LearnerApplicationsList" exact component={LearnerApplicationsList} />
                   <Route path="/SuccessfullyAproovalOrRejection" exact component={SuccessfullyAproovalOrRejection} />
                   <Route path="/UserList" exact component={UserList} />
@@ -71,6 +71,8 @@ function App() {
                   <Route path="/DealerDash" exact component={DealerDash}/>
                   <Route path="/VehicleDetails" exact component={VehicleDetails}/>
                   <Route path="/VehOwnerRegistrationForm" exact component={VehOwnerRegistrationForm}/>
+                  <Route path="/GetSingleLearnerApplication/:applicationId" exact component={GetSingleLearnerApplication} />
+
 
                   
                   

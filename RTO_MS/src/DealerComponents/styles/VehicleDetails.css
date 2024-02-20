@@ -49,25 +49,25 @@
 }
 
 
-.card {
+.cardVehDetails {
     background-color: #6a93bb80;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-top: 20px;
-    max-width: 600px;
+    max-width: 800px;
     margin-bottom: 20px;
 }
 
-.card-content {
+.cardVehDetails-content {
     padding: 20px;
 }
 
-.card-content h2 {
+.cardVehDetails-content h2 {
     margin-bottom: 10px;
     font-size: 20px;
 }
 
-.card-content p {
+.cardVehDetails-content p {
     margin: 5px 0;
 }
 

@@ -25,7 +25,7 @@ const HomePage = () => {
                   <img src="https://icon-library.com/images/to-do-list-icon/to-do-list-icon-15.jpg" alt="Service 3" />
                   <h5>REGISTER OWNER</h5>
                   <p>register the owner</p>
-                  <Link to="/OwnerRegistration" className="btn btn-primary" style={{ width: '100%', maxWidth: '100%' }}>APPLY</Link>
+                  <Link to="/VehOwnerRegistrationForm" className="btn btn-primary" style={{ width: '100%', maxWidth: '100%' }}>APPLY</Link>
                 </div>
                 <div className="HomeCard">
                   <img src="https://cdn-icons-png.flaticon.com/512/2554/2554896.png" alt="Service 4" />

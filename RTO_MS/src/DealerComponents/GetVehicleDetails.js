@@ -36,7 +36,7 @@ function VehicleDetails() {
                 <button onClick={handleSearch}>Search</button>
             </div>
 
-            <div className="card">
+            <div className="cardVehDetails">
                 {vehicleDetails === null && !error && (
                     <div className="card-content">
                         <h2>No Vehicle Found</h2>
@@ -44,14 +44,14 @@ function VehicleDetails() {
                 )}
 
                 {error && (
-                    <div className="card-content">
+                    <div className="cardVehDetails-content">
                         <h2>Error</h2>
                         <p>{error}</p>
                     </div>
                 )}
 
                 {vehicleDetails && (
-                    <div className="card-content">
+                    <div className="cardVehDetails-content">
                         <h2>Vehicle Details</h2>
                         <p>Model Name: {vehicleDetails.modelName}</p>
                         <p>Brand: {vehicleDetails.brand}</p>
