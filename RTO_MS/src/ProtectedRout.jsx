@@ -3,9 +3,13 @@ import userDashboard from "./UserComponents/UserDashboard";
 import Signin from "./MajorComponents/HomePage/LoginFunctionality/Signin";
 import LearnerLicenseApplicationForm from "./ExtraPages/LearnerLicenseApplicationForm";
 import PermanentLicense from "./Pages/PermanentLicense";
+import MyApplicationsList from "./UserComponents/options/GetMyApplications";
 import NotFound from "./NotFound";
 import { jwtDecode } from "jwt-decode";
 import UserDashboard from "./UserComponents/UserDashboard";
+import GetELearningLicense from "./UserComponents/options/GetELearningLicense";
+import McqTest from "./UserComponents/options/McqTest/McqTest";
+import FindMyVehicles from "./UserComponents/options/FindMyVehicles";
 
 function ProtectedRoute(props) 
 {
@@ -22,7 +26,17 @@ function ProtectedRoute(props)
                   <LearnerLicenseApplicationForm />
                 ) : props.path === "/PermanentLicense" ? (
                   <PermanentLicense />
-                ) : (
+                ): props.path === "/MyApplicationsList" ? (
+                  <MyApplicationsList />
+                ): props.path === "/McqTest/:applicationId" ? (
+                  <McqTest />
+                ) : props.path === "/GetELearningLicense/:applicationId" ? (
+                  <GetELearningLicense />
+                ): props.path === "/GetEPermanentLicense/:applicationId" ? (
+                  <GetELearningLicense />
+                ): props.path === "/FindMyVehicles/:userId" ? (
+                  <FindMyVehicles />
+                ): (
                   <NotFound />
                 )}
               </Route>
@@ -32,9 +46,6 @@ function ProtectedRoute(props)
     else {
         return <Redirect to="/signin" />;
       }
-    // console.log("path is : "+props.path);
-    // console.log("token is :"+decodedToken);
-    // console.log("role is :"+decodedToken.role);
     
     
     

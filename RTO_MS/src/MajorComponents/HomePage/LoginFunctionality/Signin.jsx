@@ -47,7 +47,7 @@ const Signin = () => {
 
     const { isLoggedIn, handleLogin } = useAuth();
 
-    const url = "http://192.168.0.115:8080/user/signIn";
+    const url = "http://localhost:8080/user/signIn";
     const history = useHistory();
 
     const [credentials, setCredentials] = useState({
@@ -60,7 +60,7 @@ const Signin = () => {
 
     const handleSuccess = (values) => {
         setResponseMsg(values.msg);
-        sessionStorage.setItem('loginToken', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiQURNSU4iLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.Z5j5FR__97b8pstgUHyHslIKowMDQiw_ahYWCYgEVtc');
+        sessionStorage.setItem('loginToken', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJVU0VSIiwiaWF0IjoxNTE2MjM5MDIyfQ.lZ9t-mw5Gv7_DitXjDo8RD9lcfqCQG5XlhHZ4jjhA7s');
         showModal();
         handleLogin();
 

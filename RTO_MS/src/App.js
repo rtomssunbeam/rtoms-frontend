@@ -42,6 +42,11 @@ import ProtectedRoute from './ProtectedRout'
 import Rules from './MajorComponents/HomePage/Rules'
 import MyNavbar from './MajorComponents/navBar/Navbar';
 import DealerDash from './DealerComponents/DealerDash';
+import MyApplicationsList from './UserComponents/options/GetMyApplications'; 
+import GetELearningLicense from './UserComponents/options/GetELearningLicense';
+import McqTest from './UserComponents/options/McqTest/McqTest';
+import FindMyVehicles from './UserComponents/options/FindMyVehicles';
+import VehOwnerRegistrationForm from './DealerComponents/OwnerRegister'
 
 
 
@@ -57,8 +62,17 @@ function App() {
             <Route path="/" exact component={HomePage} />
             <Route path="/home" exact component={HomePage} />
             <ProtectedRoute path="/LearnerLicenseApplicationForm" exact component={LearnerLicenseApplicationForm} />
+            <ProtectedRoute path="/MyApplicationsList" exact component={MyApplicationsList} />
             <ProtectedRoute path="/PermanentLicense" exact component={PermanentLicense} />
+            <ProtectedRoute path="/GetELearningLicense/:applicationId" exact component={GetELearningLicense} />
+            <ProtectedRoute path="/McqTest/:applicationId" exact component={McqTest} />
+            <ProtectedRoute path="/FindMyVehicles/:userId" exact component={FindMyVehicles} />
+
+            
+            <Route path="/GetSingleLearnerApplication/:applicationId" exact component={GetSingleLearnerApplication} />
+
             <Route path="/Rules" exact component={Rules} />
+            <Route path="/VehOwnerRegistrationForm" exact component={VehOwnerRegistrationForm} />
               <Route path="/Signin" exact component={Signin} />
               <Route path="/Signup" exact component={Signup} />
             
@@ -71,12 +85,13 @@ function App() {
             <Route path="/OnlineServices" exact component={Services} />
             <Route path="/LearningLicense" exact component={LearningLicense} />
             
+            
 
 
             <Route path="/Stepper" exact component={Stepper} />
             
             <Route path="/OwnerList" exact component={OwnerList} />
-            <Route path="/GetSingleLearnerApplication" exact component={GetSingleLearnerApplication} />
+            
             <Route path="/LearnerApplicationsList" exact component={LearnerApplicationsList} />
             <Route path="/SuccessfullyAproovalOrRejection" exact component={SuccessfullyAproovalOrRejection} />
             <Route path="/UserList" exact component={UserList} />

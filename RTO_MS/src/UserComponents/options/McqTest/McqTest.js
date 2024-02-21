@@ -4,8 +4,10 @@ import axios from 'axios';
 import './mcqTest.css';
 import { Redirect, useHistory } from 'react-router-dom';
 import PassComponent from './PassComponent';
+import { useParams } from 'react-router-dom';
 
-const MCQComponent = () => {
+const McqTest = () => {
+  const { applicationId } = useParams();
   const [questions, setQuestions] = useState([]); // State to store fetched questions
   const [answers, setAnswers] = useState({}); // State to store user answers
   const [formValid, setFormValid] = useState(false); // State to track form validity
@@ -131,6 +133,7 @@ const MCQComponent = () => {
       {/* Display the result after submission */}
       {submitted && (
         <div className="text-center mt-4">
+          <h3>Application Id: {applicationId}</h3>
           <h3>Your Score: {score}</h3>
           <h3>Your result: {result}</h3>
           <Button variant="primary" onClick={handleProceed}>
@@ -143,4 +146,4 @@ const MCQComponent = () => {
   );
 };
 
-export default MCQComponent;
+export default McqTest;

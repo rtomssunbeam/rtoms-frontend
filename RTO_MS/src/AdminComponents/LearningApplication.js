@@ -33,7 +33,7 @@ function GetSingleLearnerApplication() {
       qualification: "",
       applicationTypes: [],
       result: "",
-      status: "" // Add status to the state
+      status: "" 
     });
   
     const [selectedDocument, setSelectedDocument] = useState(null);

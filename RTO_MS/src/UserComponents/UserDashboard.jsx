@@ -1,9 +1,18 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import '../MajorComponents/HomePage/Home.css';
-import CarouselComponent from '../MajorComponents/carousel/Carousel';;
+import CarouselComponent from '../MajorComponents/carousel/Carousel';
+import { jwtDecode } from "jwt-decode";
 
 const UserDashboard = () => {
+
+  var userId;
+  var token = window.sessionStorage.getItem("loginToken")
+  if(token!=null)
+    {
+        const decodedToken = jwtDecode(token);
+        userId=decodedToken.userId;
+    }
   return (
     <>
 
@@ -35,6 +44,12 @@ const UserDashboard = () => {
           <p>get info your application</p>
           <Link to="/MyApplicationsList" className="btn btn-primary" style={{ width: '100%', maxWidth: '100%' }}>APPLY</Link>
         </div>
+
+        <div className="HomeCard">
+          <img src="https://cdn-icons-png.flaticon.com/512/3410/3410318.png" alt="Service 4" />
+          <h5>FIND MY VEHICLE</h5>
+          <p>get info your application</p>
+          <Link to={`/FindMyVehicles/${userId}`} className="btn btn-primary" style={{ width: '100%', maxWidth: '100%' }}>APPLY</Link>        </div>
 
       </div>
       <div className='HomeContainer' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
