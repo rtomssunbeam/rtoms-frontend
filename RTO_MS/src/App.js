@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../node_modules/bootstrap/dist/js/bootstrap.bundle.min';
 
@@ -9,70 +8,124 @@ import {
   Link,
 } from "react-router-dom";
 
-import Header from './Components/Header';
-import Footer from './Components/Footer';
-import Navbar from './Components/Navbar';
-// import MyCarousel from './Components/MyCarousel';
+import Header from './MajorComponents/Header/Header';
+import Footer from './MajorComponents/Footer/Footer';
+import Navbar from './MajorComponents/navBar/Navbar';
+import HomePage from './MajorComponents/HomePage/HomePage';
 
-
-import HpageCard from './HpageCard';
-import DriversLicense from './DriversLicense';
-import Appointment from './Appointment';
-import VehicleRegistration from './VehicleRegistration';
+import VehicleRegistration from './DealerComponents/VehicleRegistration';
 import NotFound from "./NotFound";
-import Signin from './Pages/Signin';
-import Signup from './Pages/Signup';
+import Signin from './MajorComponents/HomePage/LoginFunctionality/Signin';
+import Signup from './MajorComponents/HomePage/LoginFunctionality/Signup';
 import ContactUs from './Pages/ContactUs';
 import Services from './Pages/OnlineServices';
 import Stepper from './Components/Stepper';
 import LearningLicense from './Pages/LearningLicense';
-// import Stepper from './Components/Stepper1';
-// import Aboutus from './Pages/Aboutus';
+import OtpVerification from './MajorComponents/HomePage/LoginFunctionality/OtpVerification';
+import LearnerLicenseApplicationForm from './ExtraPages/LearnerLicenseApplicationForm'
+import VehicleListByOwner from './AdminComponents/VehicleListByOwner';
+import GetListOfOwners from './AdminComponents/GetListOfOwners'
+import GetSingleLearnerApplication from './AdminComponents/LearningApplication'
+import LearnerApplicationsList from './AdminComponents/LeranerApplications'
+import SuccessfullyAproovalOrRejection from './AdminComponents/SuccessfullyAproovalOrRejection';
+import UserList from './AdminComponents/UserList'
+import AdminDashboard from './AdminComponents/AdminDashboard';
+import UserDashboard from './UserComponents/UserDashboard'
+import Information from './ExtraPages/Information';
+import Terms from './MajorComponents/Footer/Terms'
+import FAQ from './MajorComponents/Footer/FAQ'
+import Feedback from './MajorComponents/Footer/Feedback'
+import Concern from './MajorComponents/Footer/Concern'
+import AboutUs from './Pages/AboutUs'
+import PermanentLicenseApplication from './UserComponents/PermanentLicenseApplication';
+import ProtectedRoute from './ProtectedRout'
+import Rules from './MajorComponents/HomePage/Rules'
+import MyNavbar from './MajorComponents/navBar/Navbar';
+import DealerDash from './DealerComponents/DealerDash';
+import MyApplicationsList from './UserComponents/options/GetMyApplications'; 
+import GetELearningLicense from './UserComponents/options/GetELearningLicense';
+import McqTest from './UserComponents/options/McqTest/McqTest';
+import FindMyVehicles from './UserComponents/options/FindMyVehicles';
+import VehOwnerRegistrationForm from './DealerComponents/OwnerRegister'
+import PermanentApplicationsList from './AdminComponents/PermanentApplicationsList'
+import GetVehicleDetails from './DealerComponents/GetVehicleDetails'
+
 
 
 function App() {
   return (
-    <div className="App">
-      <div id="header">
-        <Header />
-      </div>
-      <div id="navbar">
-        <Navbar />
-      </div>
+    <>
+      <Header />
+      <MyNavbar />
+
       <main className="App-body">
-        {/* <div id="MyCarousel">
-          <MyCarousel />
-        </div> */}
         <div>
           <Switch>
-            <Route path="/" exact component={HpageCard} />
-            <Route path="/home" exact component={HpageCard} />
-            <Route path="/drivers-license" exact component={DriversLicense} />
-            <Route path="/Appointment" exact component={Appointment} />
+            <Route path="/" exact component={HomePage} />
+            <Route path="/home" exact component={HomePage} />
+            <ProtectedRoute path="/LearnerLicenseApplicationForm" exact component={LearnerLicenseApplicationForm} />
+            <ProtectedRoute path="/MyApplicationsList" exact component={MyApplicationsList} />
+            <ProtectedRoute path="/PermanentLicenseApplication" exact component={PermanentLicenseApplication} />
+            <ProtectedRoute path="/GetELearningLicense/:applicationId" exact component={GetELearningLicense} />
+            <ProtectedRoute path="/McqTest/:applicationId" exact component={McqTest} />
+            <ProtectedRoute path="/FindMyVehicles/:userId" exact component={FindMyVehicles} />
+
+            
+            <Route path="/GetSingleLearnerApplication/:applicationId" exact component={GetSingleLearnerApplication} />
+            <Route path="/PermanentApplicationsList" exact component={PermanentApplicationsList} />
+            <Route path="/Rules" exact component={Rules} />
+            <Route path="/VehOwnerRegistrationForm" exact component={VehOwnerRegistrationForm} />
+            <Route path="/VehicleRegistration" exact component={VehicleRegistration} />
+              <Route path="/Signin" exact component={Signin} />
+              <Route path="/Signup" exact component={Signup} />
+            
             <Route path="/vehicle-registration" exact component={VehicleRegistration} />
-            {/* <Route path="*" exact component={NotFound} /> */}
+            
             <Route path="/Signin" exact component={Signin} />
             <Route path="/Signup" exact component={Signup} />
+            <Route path="/OtpVerification" component={OtpVerification} />
             <Route path="/ContactUs" exact component={ContactUs} />
             <Route path="/OnlineServices" exact component={Services} />
             <Route path="/LearningLicense" exact component={LearningLicense} />
-
+            
             <Route path="/Stepper" exact component={Stepper} />
+            <Route path="/GetVehicleDetails" exact component={GetVehicleDetails} />
+
+            
+            
+            <Route path="/GetListOfOwners" exact component={GetListOfOwners} />
+            <Route path="/VehicleListByOwner/:ownerId" exact component={VehicleListByOwner} />
+            
+            <Route path="/LearnerApplicationsList" exact component={LearnerApplicationsList} />
+            <Route path="/SuccessfullyAproovalOrRejection" exact component={SuccessfullyAproovalOrRejection} />
+            <Route path="/UserList" exact component={UserList} />
+            
+            <Route path="/AdminDashboard" exact component={AdminDashboard} />
+            <Route path="/DealerDash" exact component={DealerDash} />
+
+            <Route path="/UserDashboard" exact component={UserDashboard} />
+            <Route path="/Information" exact component={Information} />
+            <Route path="/Terms" exact component={Terms} />
+            <Route path="/FAQ" exact component={FAQ} />
+            <Route path="/Feedback" exact component={Feedback} />
+            <Route path="/Concern" exact component={Concern} />
+            <Route path="/AboutUs" exact component={AboutUs} />
+            <Route path="*" exact component={NotFound} />
+            
             {/* <Route path="/Aboutus" exact component={Aboutus} /> */}
             {/* <Signin />
-            </Route> */}
+                  </Route> */}
             {/* <Route exact path="/Signin">
-              <Signup />
-            </Route> */}
+                    <Signup />
+                  </Route> */}
             {/* <Route path="/Signin" component={Signin} /> */}
           </Switch>
 
         </div>
       </main>
-      <div id="footer" className="footer">
-        <Footer />
-      </div>
-    </div>
+
+      <Footer />
+    </>
 
   );
 }
