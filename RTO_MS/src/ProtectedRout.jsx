@@ -10,6 +10,7 @@ import UserDashboard from "./UserComponents/UserDashboard";
 import GetELearningLicense from "./UserComponents/options/GetELearningLicense";
 import McqTest from "./UserComponents/options/McqTest/McqTest";
 import FindMyVehicles from "./UserComponents/options/FindMyVehicles";
+import PermanentLicenseApplication from "./UserComponents/PermanentLicenseApplication"
 
 function ProtectedRoute(props) 
 {
@@ -24,8 +25,8 @@ function ProtectedRoute(props)
               <Route path={props.path} exact={props.exact}>
                 {props.path === "/LearnerLicenseApplicationForm" ? (
                   <LearnerLicenseApplicationForm />
-                ) : props.path === "/PermanentLicense" ? (
-                  <PermanentLicense />
+                ) : props.path === "/PermanentLicenseApplication" ? (
+                  <PermanentLicenseApplication />
                 ): props.path === "/MyApplicationsList" ? (
                   <MyApplicationsList />
                 ): props.path === "/McqTest/:applicationId" ? (
@@ -42,6 +43,16 @@ function ProtectedRoute(props)
               </Route>
             );
           } 
+        
+        else if (decodedToken.role == "ADMIN")
+        {
+            
+        }
+
+        else if (decodedToken.role == "DEALER")
+        {
+
+        }
     }
     else {
         return <Redirect to="/signin" />;

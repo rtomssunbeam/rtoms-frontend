@@ -20,7 +20,7 @@ const DealerDash = () => {
                   <img src="https://cdn-icons-png.flaticon.com/512/3410/3410318.png" alt="Service 4" />
                   <h5>REGISTER VEHICLE</h5>
                   <p>Registering vehicles online provides an efficient method for managing information within a system.</p>
-                  <Link to="/RegisterVehicle" className="btn btn-primary" style={{ width: '100%', maxWidth: '70%' }}>APPLY</Link>   
+                  <Link to="/VehicleRegistration" className="btn btn-primary" style={{ width: '100%', maxWidth: '70%' }}>APPLY</Link>   
                 </div>
 
                 <div className="HomeCard">

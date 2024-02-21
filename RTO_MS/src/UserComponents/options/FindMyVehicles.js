@@ -35,7 +35,7 @@ function FindMyVehicles() {
 
   return (
     <Card>
-      <Card.Header>Vehicles Associated with Owner</Card.Header>
+      <Card.Header>My Vehicles</Card.Header>
       <Card.Body>
         {vehicles.length > 0 ? (
           <table className="table">

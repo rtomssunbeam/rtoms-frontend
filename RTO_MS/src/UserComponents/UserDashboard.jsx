@@ -28,7 +28,7 @@ const UserDashboard = () => {
           <img src="https://cdn-icons-png.flaticon.com/512/2916/2916170.png" alt="Service 2" />
           <h5>PERMANENT LICENSE</h5>
           <p>apply for permanent license</p>
-          <Link to="/PermanentLicense" className="btn btn-primary" style={{ width: '100%', maxWidth: '100%' }}>APPLY</Link>
+          <Link to="/PermanentLicenseApplication" className="btn btn-primary" style={{ width: '100%', maxWidth: '100%' }}>APPLY</Link>
         </div>
         
         <div className="HomeCard">

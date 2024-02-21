@@ -13,7 +13,7 @@ import Footer from './MajorComponents/Footer/Footer';
 import Navbar from './MajorComponents/navBar/Navbar';
 import HomePage from './MajorComponents/HomePage/HomePage';
 
-import VehicleRegistration from './VehicleRegistration';
+import VehicleRegistration from './DealerComponents/VehicleRegistration';
 import NotFound from "./NotFound";
 import Signin from './MajorComponents/HomePage/LoginFunctionality/Signin';
 import Signup from './MajorComponents/HomePage/LoginFunctionality/Signup';
@@ -24,7 +24,7 @@ import LearningLicense from './Pages/LearningLicense';
 import OtpVerification from './MajorComponents/HomePage/LoginFunctionality/OtpVerification';
 import LearnerLicenseApplicationForm from './ExtraPages/LearnerLicenseApplicationForm'
 import VehicleListByOwner from './AdminComponents/VehicleListByOwner';
-import OwnerList from './AdminComponents/GetListOfOwners'
+import GetListOfOwners from './AdminComponents/GetListOfOwners'
 import GetSingleLearnerApplication from './AdminComponents/LearningApplication'
 import LearnerApplicationsList from './AdminComponents/LeranerApplications'
 import SuccessfullyAproovalOrRejection from './AdminComponents/SuccessfullyAproovalOrRejection';
@@ -37,7 +37,7 @@ import FAQ from './MajorComponents/Footer/FAQ'
 import Feedback from './MajorComponents/Footer/Feedback'
 import Concern from './MajorComponents/Footer/Concern'
 import AboutUs from './Pages/AboutUs'
-import PermanentLicense from './Pages/PermanentLicense';
+import PermanentLicenseApplication from './UserComponents/PermanentLicenseApplication';
 import ProtectedRoute from './ProtectedRout'
 import Rules from './MajorComponents/HomePage/Rules'
 import MyNavbar from './MajorComponents/navBar/Navbar';
@@ -47,6 +47,8 @@ import GetELearningLicense from './UserComponents/options/GetELearningLicense';
 import McqTest from './UserComponents/options/McqTest/McqTest';
 import FindMyVehicles from './UserComponents/options/FindMyVehicles';
 import VehOwnerRegistrationForm from './DealerComponents/OwnerRegister'
+import PermanentApplicationsList from './AdminComponents/PermanentApplicationsList'
+import GetVehicleDetails from './DealerComponents/GetVehicleDetails'
 
 
 
@@ -63,16 +65,17 @@ function App() {
             <Route path="/home" exact component={HomePage} />
             <ProtectedRoute path="/LearnerLicenseApplicationForm" exact component={LearnerLicenseApplicationForm} />
             <ProtectedRoute path="/MyApplicationsList" exact component={MyApplicationsList} />
-            <ProtectedRoute path="/PermanentLicense" exact component={PermanentLicense} />
+            <ProtectedRoute path="/PermanentLicenseApplication" exact component={PermanentLicenseApplication} />
             <ProtectedRoute path="/GetELearningLicense/:applicationId" exact component={GetELearningLicense} />
             <ProtectedRoute path="/McqTest/:applicationId" exact component={McqTest} />
             <ProtectedRoute path="/FindMyVehicles/:userId" exact component={FindMyVehicles} />
 
             
             <Route path="/GetSingleLearnerApplication/:applicationId" exact component={GetSingleLearnerApplication} />
-
+            <Route path="/PermanentApplicationsList" exact component={PermanentApplicationsList} />
             <Route path="/Rules" exact component={Rules} />
             <Route path="/VehOwnerRegistrationForm" exact component={VehOwnerRegistrationForm} />
+            <Route path="/VehicleRegistration" exact component={VehicleRegistration} />
               <Route path="/Signin" exact component={Signin} />
               <Route path="/Signup" exact component={Signup} />
             
@@ -80,22 +83,23 @@ function App() {
             
             <Route path="/Signin" exact component={Signin} />
             <Route path="/Signup" exact component={Signup} />
-            <Route path="/otp-verification" component={OtpVerification} />
+            <Route path="/OtpVerification" component={OtpVerification} />
             <Route path="/ContactUs" exact component={ContactUs} />
             <Route path="/OnlineServices" exact component={Services} />
             <Route path="/LearningLicense" exact component={LearningLicense} />
             
-            
-
-
             <Route path="/Stepper" exact component={Stepper} />
+            <Route path="/GetVehicleDetails" exact component={GetVehicleDetails} />
+
             
-            <Route path="/OwnerList" exact component={OwnerList} />
+            
+            <Route path="/GetListOfOwners" exact component={GetListOfOwners} />
+            <Route path="/VehicleListByOwner/:ownerId" exact component={VehicleListByOwner} />
             
             <Route path="/LearnerApplicationsList" exact component={LearnerApplicationsList} />
             <Route path="/SuccessfullyAproovalOrRejection" exact component={SuccessfullyAproovalOrRejection} />
             <Route path="/UserList" exact component={UserList} />
-            <Route path="/VehicleListByOwner" exact component={VehicleListByOwner} />
+            
             <Route path="/AdminDashboard" exact component={AdminDashboard} />
             <Route path="/DealerDash" exact component={DealerDash} />
 

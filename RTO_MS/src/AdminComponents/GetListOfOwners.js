@@ -4,7 +4,7 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import { useHistory } from 'react-router-dom';
 
-function OwnerList() {
+function GetListOfOwners() {
   const [owners, setOwners] = useState([]);
   const [pageNumber, setPageNumber] = useState(0);
 
@@ -88,4 +88,4 @@ function OwnerList() {
   );
 }
 
-export default OwnerList;
+export default GetListOfOwners;

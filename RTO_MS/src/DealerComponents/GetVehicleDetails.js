@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './styles/VehicleDetails.css'; // Import CSS file for styling
 
-function VehicleDetails() {
+function GetVehicleDetails() {
     const [regNo, setRegNo] = useState('');
     const [vehicleDetails, setVehicleDetails] = useState(null);
     const [error, setError] = useState(null);
@@ -72,4 +72,4 @@ function VehicleDetails() {
     );
 }
 
-export default VehicleDetails;
+export default GetVehicleDetails;
