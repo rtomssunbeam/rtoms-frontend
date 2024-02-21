@@ -54,7 +54,7 @@ function App() {
             {/* <Route path="*" exact component={NotFound} /> */}
             <Route path="/Signin" exact component={Signin} />
             <Route path="/Signup" exact component={Signup} />
-            <Route path="/otp-verification" component={OtpVerification} />
+            <Route path="/OtpVerification" component={OtpVerification} />
             <Route path="/ContactUs" exact component={ContactUs} />
             <Route path="/OnlineServices" exact component={Services} />
             <Route path="/LearningLicense" exact component={LearningLicense} />

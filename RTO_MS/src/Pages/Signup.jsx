@@ -1,6 +1,8 @@
-import React from 'react';
-import { Form, Input, Button, Checkbox, Select } from 'antd';
+import React, { useState } from 'react';
+import { Form, Input, Button, Checkbox, Spin } from 'antd';
 import { useHistory } from 'react-router-dom';
+import axios from 'axios';
+// import OtpVerification from './OtpVerification';
 // const { Option } = Select;
 
 const tailFormItemLayout = {
@@ -17,155 +19,197 @@ const tailFormItemLayout = {
 };
 
 const SignupForm = () => {
+
+  // const url = "http://127.0.0.1:8080/emailService/send-otp"
+  // const url = "http://192.168.0.115:8080/emailService/send-otp"
+  const url = "http://localhost:8080/emailService/send-otp"
+  // const url1 = "http://192.168.0.115:8080/emailService/verify-otp"
+
+
   const history = useHistory();
-  const onFinish = (values) => {
-    console.log('Received values of form: ', values);
-     // Redirect to the OTP verification page
-     history.push('/otp-verification');
+  const [loading, setLoading] = useState(false);
+  const [userDetails, setCredentials] = useState({
+    email: "",
+    adharcardNo: "",
+    firstName: "",
+    lastName: "",
+    password: "",
+  });
+
+  // const onFinish = (values) => {
+  //   console.log('Received values of form: ', values);
+  //    // Redirect to the OTP verification page
+  //    history.push('/otp-verification');
+  // };
+
+  const onFinish = async () => {
+    try {
+      // Make API request to send OTP and get response
+      setLoading(true);
+      console.log(userDetails)
+      console.log(userDetails.email.toString())
+
+      const response = await axios.post(url,
+
+        null
+        ,
+        {
+          params: {
+            email: userDetails.email
+          }
+        }
+      );
+      console.log(response.data.message)
+      // Redirect to OTP verification page and pass user details as props
+      if (response.data.message === "OTP sent successfully!") {
+        history.push({
+          pathname: '/OtpVerification',
+          state: { user: userDetails },
+        });
+      }
+
+    } catch (error) {
+      console.error('Error sending OTP:', error);
+      // Handle error, show a message, etc.
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setCredentials((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
   return (
-    <Form
-      onFinish={onFinish}
-      style={{
-        maxWidth: 600,
-      }}
-      scrollToFirstError
-    >
-
-      <Form.Item
-        name="email"
-        label="E-mail"
-        rules={[
-          {
-            type: 'email',
-            message: 'The input is not a valid E-mail!',
-          },
-          {
-            required: true,
-            message: 'Please input your E-mail!',
-          },
-        ]}
+    <Spin spinning={loading} tip="Sending OTP...">
+      <Form
+        onFinish={onFinish}
+        style={{
+          maxWidth: 600,
+        }}
+        scrollToFirstError
       >
-        <Input />
-      </Form.Item>
 
-      <Form.Item
-        name="adharcard_no"
-        label="Aadhaar Card"
-        rules={[
-          {
-            required: true,
-            message: 'Please input your Aadhaar card number!',
-          },
-        ]}
-      >
-        <Input />
-      </Form.Item>
-
-      <Form.Item
-        name="first_name"
-        label="First Name"
-        rules={[
-          {
-            required: true,
-            message: 'Please input your first name!',
-          },
-        ]}
-      >
-        <Input />
-      </Form.Item>
-
-      <Form.Item
-        name="last_name"
-        label="Last Name"
-        rules={[
-          {
-            required: true,
-            message: 'Please input your last name!',
-          },
-        ]}
-      >
-        <Input />
-      </Form.Item>
-
-      {/* <Form.Item
-        name="role"
-        label="Role"
-        rules={[
-          {
-            required: true,
-            message: 'Please select Role!',
-          },
-        ]}
-      >
-        <Select placeholder="Select your role">
-          <Option value="Admin">Admin</Option>
-          <Option value="Dealer">Dealer</Option>
-          <Option value="User">User</Option>
-          <Option value="Other">Other</Option>
-        </Select>
-      </Form.Item> */}
-
-      <Form.Item
-        name="password"
-        label="Password"
-        rules={[
-          {
-            required: true,
-            message: 'Please input your password!',
-          },
-        ]}
-        hasFeedback
-      >
-        <Input.Password />
-      </Form.Item>
-
-      <Form.Item
-        name="confirm"
-        label="Confirm Password"
-        dependencies={['password']}
-        hasFeedback
-        rules={[
-          {
-            required: true,
-            message: 'Please confirm your password!',
-          },
-          ({ getFieldValue }) => ({
-            validator(_, value) {
-              if (!value || getFieldValue('password') === value) {
-                return Promise.resolve();
-              }
-              return Promise.reject(new Error('The new password that you entered do not match!'));
+        <Form.Item
+          name="email"
+          label="E-mail"
+          rules={[
+            {
+              type: 'email',
+              message: 'The input is not a valid E-mail!',
             },
-          }),
-        ]}
-      >
-        <Input.Password />
-      </Form.Item>
+            {
+              required: true,
+              message: 'Please input your E-mail!',
+            },
+          ]}
+        >
+          <Input name='email' onChange={handleChange} />
+        </Form.Item>
 
-      <Form.Item
-        name="agreement"
-        valuePropName="checked"
-        rules={[
-          {
-            validator: (_, value) =>
-              value ? Promise.resolve() : Promise.reject(new Error('Should accept agreement')),
-          },
-        ]}
-        {...tailFormItemLayout}
-      >
-        <Checkbox>
-          I have read the <a href="">agreement</a>
-        </Checkbox>
-      </Form.Item>
+        <Form.Item
+          name="adharcardNo"
+          label="Aadhaar Card"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your Aadhaar card number!',
+            },
+          ]}
+        >
+          <Input name='adharcardNo' onChange={handleChange} />
+        </Form.Item>
 
-      <Form.Item {...tailFormItemLayout}>
-        <Button type="primary" htmlType="submit">
-          Register
-        </Button>
-      </Form.Item>
-    </Form>
+        <Form.Item
+          name="firstName"
+          label="First Name"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your first name!',
+            },
+          ]}
+        >
+          <Input name='firstName' onChange={handleChange} />
+        </Form.Item>
+
+        <Form.Item
+          name="lastName"
+          label="Last Name"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your last name!',
+            },
+          ]}
+        >
+          <Input name='lastName' onChange={handleChange} />
+        </Form.Item>
+
+        <Form.Item
+          name="password"
+          label="Password"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your password!',
+            },
+          ]}
+          hasFeedback
+        >
+          <Input.Password name='password' onChange={handleChange} />
+        </Form.Item>
+
+        <Form.Item
+          name="confirm"
+          label="Confirm Password"
+          dependencies={['password']}
+          hasFeedback
+          rules={[
+            {
+              required: true,
+              message: 'Please confirm your password!',
+            },
+            ({ getFieldValue }) => ({
+              validator(_, value) {
+                if (!value || getFieldValue('password') === value) {
+                  return Promise.resolve();
+                }
+                return Promise.reject(new Error('Confirm password do not match!'));
+              },
+            }),
+          ]}
+        >
+          <Input.Password />
+        </Form.Item>
+
+        <Form.Item
+          name="agreement"
+          valuePropName="checked"
+          rules={[
+            {
+              validator: (_, value) =>
+                value ? Promise.resolve() : Promise.reject(new Error('Should accept agreement')),
+            },
+          ]}
+          {...tailFormItemLayout}
+        >
+          <Checkbox>
+            I have read the <a href="">agreement</a>
+          </Checkbox>
+        </Form.Item>
+
+        <Form.Item {...tailFormItemLayout}>
+          <Button type="primary" htmlType="submit" disabled={loading}>
+            Register
+          </Button>
+        </Form.Item>
+      </Form>
+    </Spin>
   );
 };
 

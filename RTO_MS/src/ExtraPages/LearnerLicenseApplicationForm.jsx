@@ -34,8 +34,8 @@ const StyledForm = styled(Form)`
 // `;
 
 const LearnerLicenseApplicationForm = () => {
-    // const url = "http://127.0.0.1:8080/lernerLicense/application"
-    const url = "http://192.168.0.115:8080/lernerLicense/application"
+    const url = "http://127.0.0.1:8080/lernerLicense/application"
+    // const url = "http://192.168.0.115:8080/lernerLicense/application"
     const [formData, setFormData] = useState({
         firstName: '',
         middleName: '',

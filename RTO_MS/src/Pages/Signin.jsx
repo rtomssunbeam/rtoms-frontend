@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { Button, Checkbox, Form, Input , Modal} from 'antd';
+import { Button, Checkbox, Form, Input, Modal,Spin } from 'antd';
 import styled from 'styled-components';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -37,9 +37,10 @@ const StyledLink = styled(Link)`
 `;
 
 const Signin = () => {
-    const url = "http://192.168.0.115:8080/user/signIn";
+    // const url = "http://192.168.0.115:8080/user/signIn";
+    const url = "http://localhost:8080/user/signIn";
     const history = useHistory();
-
+    const [loading, setLoading] = useState(false);
     const [credentials, setCredentials] = useState({
         email: "",
         password: ""
@@ -71,21 +72,23 @@ const Signin = () => {
         history.push("/");
     };
 
-    const handleCancel = () => {
-        setIsModalVisible(false);
-    };
+    // const handleCancel = () => {
+    //     setIsModalVisible(false);
+    // };
 
 
     const handleFailure = (errorInfo) => {
         console.log('Failed:', errorInfo);
-        toast.error('Login failed');
+        toast.error('Email or Password is incorrect');
     };
 
     const handleFormSubmit = async () => {
         try {
+            setLoading(true);
             // Make a POST request using Axios
             const response = await axios.post(url, credentials);
-
+            console.log(response.data)
+            if(response.data.msg==="user logged in successfully"){
             // Handle success
             handleSuccess(response.data);
 
@@ -94,11 +97,16 @@ const Signin = () => {
             if (tokenReceived) {
                 window.sessionStorage.setItem("loginToken", tokenReceived);
 
+            }}
+            else{
+                handleFailure(response.data.msg);
             }
             // history.push("/");
         } catch (error) {
             // Handle error
             handleFailure(error);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -119,86 +127,88 @@ const Signin = () => {
 
 
     return (
-        <StyledBox>
-            <StyledForm
-                name="basic"
-                labelCol={{
-                    span: 8,
-                }}
-                wrapperCol={{
-                    span: 16,
-                }}
-                initialValues={{
-                    remember: true,
-                }}
-                onFinish={handleFormSubmit}
-                onFinishFailed={handleFailure}
-                autoComplete="off"
-            >
-                <Form.Item
-                    label="Username"
-                    name="email"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please input your username(i.e. email)!',
-                        },
-                    ]}
-                >
-                    <Input name='email' onChange={handleChange} />
-                </Form.Item>
-
-                <Form.Item
-                    label="Password"
-                    name="password"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please input your password!',
-                        },
-                    ]}
-                >
-                    <Input.Password name='password' onChange={handleChange} />
-                </Form.Item>
-
-                <Form.Item
-                    name="remember"
-                    valuePropName="checked"
+        <Spin spinning={loading} tip="Signing In...">
+            <StyledBox>
+                <StyledForm
+                    name="basic"
+                    labelCol={{
+                        span: 8,
+                    }}
                     wrapperCol={{
-                        offset: 8,
                         span: 16,
                     }}
-                >
-                    <Checkbox>Remember me</Checkbox>
-                </Form.Item>
-
-                <Form.Item
-                    wrapperCol={{
-                        offset: 8,
-                        span: 16,
+                    initialValues={{
+                        remember: true,
                     }}
+                    onFinish={handleFormSubmit}
+                    onFinishFailed={handleFailure}
+                    autoComplete="off"
                 >
-                    <Button type="primary" htmlType="submit">
-                        Submit
-                    </Button>
-                </Form.Item>
+                    <Form.Item
+                        label="Username"
+                        name="email"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please input your username(i.e. email)!',
+                            },
+                        ]}
+                    >
+                        <Input name='email' onChange={handleChange} />
+                    </Form.Item>
 
-                <Form.Item>
-                    Don't have an account?
-                    <StyledLink to="/Signup">SignUp</StyledLink>
-                </Form.Item>
-            </StyledForm>
+                    <Form.Item
+                        label="Password"
+                        name="password"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please input your password!',
+                            },
+                        ]}
+                    >
+                        <Input.Password name='password' onChange={handleChange} />
+                    </Form.Item>
 
-            <ToastContainer />
-            <Modal
-                title="Login Success"
-                visible={isModalVisible}
-                onOk={handleOk}
-                onCancel={handleCancel}
-            >
-                <p>{responseMsg}</p>
-            </Modal>
-        </StyledBox>
+                    <Form.Item
+                        name="remember"
+                        valuePropName="checked"
+                        wrapperCol={{
+                            offset: 8,
+                            span: 16,
+                        }}
+                    >
+                        <Checkbox>Remember me</Checkbox>
+                    </Form.Item>
+
+                    <Form.Item
+                        wrapperCol={{
+                            offset: 8,
+                            span: 16,
+                        }}
+                    >
+                        <Button type="primary" htmlType="submit" disabled={loading}>
+                            Submit
+                        </Button>
+                    </Form.Item>
+
+                    <Form.Item>
+                        Don't have an account?
+                        <StyledLink to="/Signup">SignUp</StyledLink>
+                    </Form.Item>
+                </StyledForm>
+
+                <ToastContainer />
+                <Modal
+                    title="Login Success"
+                    open={isModalVisible}
+                    onOk={handleOk}
+                    // onCancel={handleCancel}
+                >
+                    <p>{responseMsg}</p>
+                </Modal>
+            </StyledBox>
+        </Spin>
     );
 };
 
